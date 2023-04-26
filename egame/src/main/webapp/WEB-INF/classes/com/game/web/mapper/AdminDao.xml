@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.game.web.dao.AdminDao">
+
+<resultMap type="com.game.web.model.User" id="userResultMap">
+		<id column="USER_ID" property="userId" />
+		<result column="USER_PWD" property="userPwd" />
+		<result column="USER_NAME" property="userName" />
+		<result column="USER_NICKNAME" property="userNickname" />
+		<result column="USER_EMAIL" property="userEmail" />
+		<result column="USER_BIRTH" property="userBirth" />
+		<result column="BUSINESS_NUM" property="businessNum" />
+		<result column="USER_REG_DATE" property="userRegDate" />
+		<result column="USER_IMG" property="userImg" />
+		<result column="POINT_POS" property="pointPos" />
+		<result column="USER_STATUS" property="userStatus" />
+		<result column="USER_CLASS" property="userClass" />
+	</resultMap>
+
+<!-- 상품 resultMap -->
+	<resultMap type="com.game.web.model.Product" id="productResultMap">
+	<id column="PRODUCT_SEQ" property="productSeq"/>
+	<result column="USER_SELLER_ID" property="userSellerId"/>
+	<result column="DISCNT_SEQ" property="discntSeq"/>
+	<result column="PRODUCT_NAME" property="productName"/>
+	<result column="PRODUCT_PRICE" property="productPrice"/>
+	<result column="PRODUCT_CONTENT" property="productContent"/>
+	<result column="PRODUCT_BUY_CNT" property="productBuyCnt"/>
+	<result column="PAY_PRICE" property="payPrice"/>
+	<result column="REVIEW_CNT" property="reviewCnt"/>
+	<result column="PRODUCT_GRADE" property="productGrade"/>
+	<result column="PRODUCT_STATUS" property="productStatus"/>
+</resultMap>
+<!-- 할인 테이블 리졸트 맵 -->
+	<resultMap type="com.game.web.model.Discnt" id="discntResultMap">
+	<id column="DISCNT_SEQ" property="discntSeq"/>
+	<result column="PRODUCT_SEQ" property="productSeq"/>
+	<result column="DISCNT_RATE" property="discntRate"/>
+	<result column="DISCNT_START_DATE" property="discntStartDate"/>
+	<result column="DISCNT_END_DATE" property="discntEndDate"/>
+	<result column="DISCNT_STATUS" property="discntStatus"/>
+	<result column="PRODUCT_NAME" property="productName"/>
+	</resultMap>
+
+
+<!-- 유저 총 카운트 -->
+<select id="userCount" parameterType="com.game.web.model.User" resultType="int">
+SELECT COUNT(USER_ID)
+  FROM TBL_USER
+ WHERE USER_CLASS <![CDATA[<>]]> 'a'
+ 	<if test = "searchType != null and searchType != '' and searchValue != null and searchValue != ''">
+ 	<choose>
+ 		<when test="searchType == 'userId'">
+ 		AND LOWER(USER_ID) LIKE LOWER('%' || #{searchValue} || '%')
+ 		</when>
+ 		<when test="searchType == 'userNickname'">
+ 		AND LOWER(USER_NICKNAME) LIKE LOWER('%' || #{searchValue} || '%')
+ 		</when>
+ 		<when test="searchType == 'userEmail'">
+ 		AND LOWER(USER_EMAIL) LIKE LOWER('%' || #{searchValue} || '%')
+ 		</when>
+ 	</choose>
+ 	</if>
+   <choose>
+         <when test="userStatus != '' and userStatus == '1'">
+           AND USER_STATUS = '1'
+         </when>
+         <when test="userStatus != '' and userStatus == '0'">
+           AND USER_STATUS = '0'
+         </when>
+   </choose>  
+   <choose>
+         <when test="userClass != '' and userClass == 'u'">
+         	 AND USER_CLASS = 'u'
+         </when>
+         <when test="userClass != '' and userClass == 's'">
+         	 AND USER_CLASS = 's'
+         </when>
+   </choose>
+</select>
+
+<!-- 유저 페이징 리스트 -->
+<select id="userList" parameterType="com.game.web.model.User" resultMap="userResultMap">
+SELECT *
+  FROM(SELECT ROWNUM RNUM,
+        USER_ID,
+        USER_PWD,
+        USER_NAME,
+        USER_NICKNAME,
+        USER_EMAIL,
+        BUSINESS_NUM,
+        USER_REG_DATE,
+        USER_IMG,
+        POINT_POS,
+        USER_STATUS,
+        USER_CLASS
+      FROM(SELECT
+            USER_ID,
+            USER_PWD,
+            USER_NAME,
+            USER_NICKNAME,
+            USER_EMAIL,
+            NVL(BUSINESS_NUM,0) AS BUSINESS_NUM,
+            TO_CHAR(NVL(USER_REG_DATE,''),'YYYY-MM-DD HH24:MI:SS') AS USER_REG_DATE,
+            NVL(USER_IMG,' ') AS USER_IMG,
+            NVL(POINT_POS,0) AS POINT_POS,
+            USER_STATUS,
+            USER_CLASS
+          FROM
+            TBL_USER
+          WHERE USER_CLASS <![CDATA[<>]]> 'a'
+          <if test = "searchType != null and searchType != '' and searchValue != null and searchValue != ''">
+		 	<choose>
+		 		<when test="searchType == 'userId'">
+		 		AND LOWER(USER_ID) LIKE LOWER('%' || #{searchValue} || '%')
+		 		</when>
+		 		<when test="searchType == 'userNickname'">
+		 		AND LOWER(USER_NICKNAME) LIKE LOWER('%' || #{searchValue} || '%')
+		 		</when>
+		 		<when test="searchType == 'userEmail'">
+		 		AND LOWER(USER_EMAIL) LIKE LOWER('%' || #{searchValue} || '%')
+		 		</when>
+		 	</choose>
+		 </if>
+         <choose>
+         <when test="userStatus != '' and userStatus == '1'">
+           AND USER_STATUS = '1'
+         </when>
+         <when test="userStatus != '' and userStatus == '0'">
+           AND USER_STATUS = '0'
+         </when>
+         </choose>  
+         <choose>
+         <when test="userClass != '' and userClass == 'u'">
+         	 AND USER_CLASS = 'u'
+         </when>
+         <when test="userClass != '' and userClass == 's'">
+         	 AND USER_CLASS = 's'
+         </when>
+         </choose>
+         ORDER BY USER_REG_DATE DESC))
+ WHERE RNUM <![CDATA[>=]]> #{startRow}
+   AND RNUM <![CDATA[<=]]> #{endRow}
+</select>
+
+<!-- 유저 업데이트 -->
+<update id="userUpdate" parameterType="com.game.web.model.User">
+UPDATE TBL_USER
+SET
+    USER_STATUS = #{userStatus}
+WHERE USER_ID = #{userId}
+</update>
+
+<!-- 상품 리스트(페이징) -->
+<select id="productList" parameterType="com.game.web.model.ProductSearch" resultMap="productResultMap">
+SELECT *
+  FROM(
+  SELECT ROWNUM AS RNUM,
+        PRODUCT_SEQ,
+        USER_SELLER_ID,
+        DISCNT_SEQ,
+        PRODUCT_NAME,
+        PRODUCT_PRICE,
+        PRODUCT_CONTENT,
+        PRODUCT_BUY_CNT,
+        PAY_PRICE,
+        REVIEW_CNT,
+        PRODUCT_GRADE,
+        PRODUCT_STATUS
+  FROM(
+SELECT
+    PRODUCT_SEQ,
+    NVL(USER_SELLER_ID,'') AS USER_SELLER_ID,
+    NVL(DISCNT_SEQ,0) AS DISCNT_SEQ,
+    NVL(PRODUCT_NAME,'') AS PRODUCT_NAME,
+    NVL(PRODUCT_PRICE,0) AS PRODUCT_PRICE,
+    NVL(PRODUCT_CONTENT,'') AS PRODUCT_CONTENT,
+    NVL(PRODUCT_BUY_CNT,0) AS PRODUCT_BUY_CNT,
+    NVL(PAY_PRICE,0) AS PAY_PRICE,
+    NVL(REVIEW_CNT,0) AS REVIEW_CNT,
+    NVL(PRODUCT_GRADE,0)AS PRODUCT_GRADE,
+    NVL(PRODUCT_STATUS,'N')AS PRODUCT_STATUS
+  FROM
+    TBL_PRODUCT
+ WHERE PRODUCT_SEQ IN 
+ (
+ SELECT DISTINCT A.PRODUCT_SEQ
+  FROM TBL_PRODUCT A, TBL_PRODUCT_TAG B
+ WHERE A.PRODUCT_SEQ=B.PRODUCT_SEQ
+   <if test='productName != null and productName != ""'>
+   AND LOWER(REPLACE(A.PRODUCT_NAME,' ','')) LIKE LOWER(REPLACE('%' || #{productName} || '%',' ',''))
+ </if>
+ <if test='discntCheck != null and discntCheck == "Y"'>
+    AND A.DISCNT_SEQ <![CDATA[>=]]> 1
+ </if>
+ <if test='minPrice != null and minPrice !=""'>
+    AND A.PAY_PRICE <![CDATA[>=]]> #{minPrice}
+ </if>
+  <if test='maxPrice != null and maxPrice !=""'>
+    AND A.PAY_PRICE <![CDATA[<=]]> #{maxPrice}
+ </if>
+ <if test='productStatus != null and productStatus != ""'>
+ 	AND A.PRODUCT_STATUS = #{productStatus}
+ </if>
+ <if test='tagParentNum != null and tagParentNum !=""'>
+    AND A.PRODUCT_SEQ IN (SELECT PRODUCT_SEQ
+                          FROM TBL_PRODUCT_TAG
+                         WHERE TAG_NUM = #{tagParentNum}
+     				<if test = 'tagNum != null'>
+     				<foreach collection="tagNum" item = "i">
+                           AND PRODUCT_SEQ IN 
+                           (SELECT PRODUCT_SEQ
+                              FROM TBL_PRODUCT_TAG
+                             WHERE TAG_NUM = #{i})                         
+     				</foreach>
+     				</if>            )
+  </if>
+  )
+ 
+ 	ORDER BY PRODUCT_SEQ DESC
+ ))
+ WHERE RNUM <![CDATA[>=]]>#{startRow}
+   AND RNUM <![CDATA[<=]]>#{endRow}
+</select>
+
+<select id="productListCnt" parameterType="com.game.web.model.ProductSearch" resultType="int">
+SELECT COUNT(PRODUCT_SEQ)
+  FROM
+(SELECT DISTINCT A.PRODUCT_SEQ
+  FROM TBL_PRODUCT A, TBL_PRODUCT_TAG B
+ WHERE A.PRODUCT_SEQ=B.PRODUCT_SEQ
+ <if test='productName != null and productName != ""'>
+   AND LOWER(REPLACE(A.PRODUCT_NAME,' ','')) LIKE LOWER(REPLACE('%' || #{productName} || '%',' ',''))
+ </if>
+ <if test='discntCheck != null and discntCheck == "Y"'>
+    AND A.DISCNT_SEQ <![CDATA[>=]]> 1
+ </if>
+ <if test='minPrice != null and minPrice !=""'>
+    AND A.PAY_PRICE <![CDATA[>=]]> #{minPrice}
+ </if>
+  <if test='maxPrice != null and maxPrice !=""'>
+    AND A.PAY_PRICE <![CDATA[<=]]> #{maxPrice}
+ </if>
+ <if test='productStatus != null and productStatus != ""'>
+ 	AND A.PRODUCT_STATUS = #{productStatus}
+ </if>
+ <if test='tagParentNum != null and tagParentNum !=""'>
+    AND A.PRODUCT_SEQ IN (SELECT PRODUCT_SEQ
+                          FROM TBL_PRODUCT_TAG
+                         WHERE TAG_NUM = #{tagParentNum}
+     				<if test = 'tagNum != null'>
+     				<foreach collection="tagNum" item = "i">
+                           AND PRODUCT_SEQ IN 
+                           (SELECT PRODUCT_SEQ
+                              FROM TBL_PRODUCT_TAG
+                             WHERE TAG_NUM = #{i})                         
+     				</foreach>
+     				</if>            )
+  </if>
+  )
+</select>
+
+<!-- 할인테이블 셀렉트-->
+<select id="discntSelect" parameterType="long" resultMap="discntResultMap">
+SELECT
+    DISCNT_SEQ,
+    PRODUCT_SEQ,
+    DISCNT_RATE,
+    DISCNT_START_DATE,
+    DISCNT_END_DATE,
+    DISCNT_STATUS
+  FROM
+    TBL_DISCNT
+ WHERE DISCNT_SEQ = #{value}
+</select>
+
+<!-- 태그번호 이름으로 전환 -->
+<select id="productTagNameSelect" parameterType="long" resultType="string">
+SELECT TAG_NAME
+  FROM TBL_PRODUCT_TAG A, TBL_TAG B
+ WHERE A.TAG_NUM = B.TAG_NUM
+   AND A.PRODUCT_SEQ = #{product_seq}
+</select>
+
+<!-- 상품 단일 객체 가져오기 -->
+<select id="productSelect" parameterType="long" resultMap="productResultMap">
+SELECT PRODUCT_SEQ,
+        USER_SELLER_ID,
+        NVL(DISCNT_SEQ,0) AS DISCNT_SEQ,
+        PRODUCT_NAME,
+        PRODUCT_PRICE,
+        NVL(PRODUCT_CONTENT,'') AS PRODUCT_CONTENT,
+        NVL(PRODUCT_BUY_CNT,0) AS PRODUCT_BUY_CNT,
+        PAY_PRICE,
+        NVL(REVIEW_CNT,0) AS REVIEW_CNT,
+        NVL(PRODUCT_GRADE,0) AS PRODUCT_GRADE,
+        NVL(PRODUCT_STATUS,'Y') AS PRODUCT_STATUS
+  FROM TBL_PRODUCT
+ WHERE PRODUCT_SEQ = #{value}
+
+</select>
+
+<!-- 상품 스테이터스 업데이트 -->
+<update id="productStatusUpdate" parameterType="com.game.web.model.Product">
+UPDATE TBL_PRODUCT
+   SET PRODUCT_STATUS = #{productStatus}
+ WHERE PRODUCT_SEQ = #{productSeq}
+</update>
+
+<!-- 할인테이블에 해당상품 날짜가 안지난 할인 열이 있는지 확인 -->
+<select id="productDiscntCheck" parameterType="long" resultMap="discntResultMap">
+SELECT
+    DISCNT_SEQ,
+    PRODUCT_SEQ,
+    DISCNT_RATE,
+    DISCNT_START_DATE,
+    DISCNT_END_DATE,
+    DISCNT_STATUS
+  FROM
+    TBL_DISCNT
+ WHERE PRODUCT_SEQ = ${productSeq}
+   AND DISCNT_END_DATE <![CDATA[>=]]> TO_CHAR(SYSDATE,'YYYYMMDD')
+</select>
+
+<!-- 할인테이블 인서트 -->
+<insert id="discntInsert" parameterType="com.game.web.model.Discnt">
+<selectKey resultType="long" keyProperty="discntSeq" order="BEFORE"> SELECT DISCNT_SEQ.NEXTVAL FROM DUAL </selectKey>
+INSERT INTO TBL_DISCNT (
+    DISCNT_SEQ,
+    PRODUCT_SEQ,
+    DISCNT_RATE,
+    DISCNT_START_DATE,
+    DISCNT_END_DATE,
+    DISCNT_STATUS
+) VALUES (
+    #{discntSeq},
+    #{productSeq},
+    #{discntRate},
+    #{discntStartDate},
+    #{discntEndDate},
+    #{discntStatus}
+)
+</insert>
+<!-- 할인 업데이트 -->
+<update id="discntUpdate" parameterType="com.game.web.model.Discnt">
+UPDATE TBL_DISCNT
+SET DISCNT_RATE = #{discntRate},
+    DISCNT_START_DATE = #{discntStartDate},
+    DISCNT_END_DATE = #{discntEndDate},
+    DISCNT_STATUS = #{discntStatus}
+ WHERE PRODUCT_SEQ = #{productSeq}
+</update>
+
+<!-- 할인 업데이트(할인 번호) -->
+<update id="discntSeqUpdate" parameterType="com.game.web.model.Discnt">
+UPDATE TBL_DISCNT
+SET DISCNT_RATE = #{discntRate},
+    DISCNT_START_DATE = #{discntStartDate},
+    DISCNT_END_DATE = #{discntEndDate},
+    DISCNT_STATUS = #{discntStatus}
+ WHERE DISCNT_SEQ = #{discntSeq}
+</update>
+
+<!-- 할인 삭제 -->
+<delete id="discntDelete" parameterType="long">
+DELETE TBL_DISCNT
+ WHERE DISCNT_SEQ = #{value}
+</delete>
+
+<!-- 할인 총 카운트 -->
+<select id="discntCount" parameterType="com.game.web.model.Discnt" resultType="int">
+SELECT COUNT(A.DISCNT_SEQ)
+   FROM TBL_DISCNT A, TBL_PRODUCT B
+ WHERE A.PRODUCT_SEQ = B.PRODUCT_SEQ
+<!-- 이름검색 -->
+<if test='searchValue != null and searchValue != ""'>
+   AND LOWER(REPLACE(B.PRODUCT_NAME,' ','')) LIKE LOWER(REPLACE('%' || #{searchValue} || '%',' ',''))
+</if>
+<if test='dateSearch != null and dateSearch!= ""'>
+<choose>
+<when test='dateSearch == "before"'>
+<!-- 할인 시작전 -->
+   AND A.DISCNT_START_DATE <![CDATA[>]]> TO_CHAR(SYSDATE,'YYYYMMDD')
+</when>
+<when test='dateSearch == "proceed"'>
+<!--할인 기간내-->
+   AND A.DISCNT_START_DATE <![CDATA[<=]]> TO_CHAR(SYSDATE,'YYYYMMDD')
+   AND A.DISCNT_END_DATE <![CDATA[>=]]> TO_CHAR(SYSDATE,'YYYYMMDD')
+</when>
+<when test='dateSearch == "end"'>
+<!--할인 종료 검색-->   
+   AND A.DISCNT_END_DATE <![CDATA[<=]]> TO_CHAR(SYSDATE,'YYYYMMDD')
+</when>
+</choose>
+</if>
+<if test="discntStatus.equals('Y') or discntStatus.equals('N')">
+<!--할인 적용여부-->
+   AND A.DISCNT_STATUS = #{discntStatus}
+</if>
+</select>
+
+<!-- 할인 리스트 -->
+<select id="discntList" parameterType="com.game.web.model.Discnt" resultMap="discntResultMap">
+
+SELECT *
+FROM(SELECT ROWNUM RNUM,
+            DISCNT_SEQ,
+            PRODUCT_SEQ,
+            DISCNT_RATE,
+            DISCNT_START_DATE,
+            DISCNT_END_DATE,
+            DISCNT_STATUS,
+            PRODUCT_NAME
+      FROM(SELECT A.DISCNT_SEQ,
+                    A.PRODUCT_SEQ,
+                    A.DISCNT_RATE,
+                    TO_CHAR(TO_DATE(A.DISCNT_START_DATE,'YYYYMMDD'),'YYYYMMDD') AS DISCNT_START_DATE,
+                    TO_CHAR(TO_DATE(A.DISCNT_END_DATE,'YYYYMMDD'),'YYYYMMDD') AS DISCNT_END_DATE,
+                    A.DISCNT_STATUS,
+                    B.PRODUCT_NAME
+                  FROM TBL_DISCNT A, TBL_PRODUCT B
+                 WHERE A.PRODUCT_SEQ = B.PRODUCT_SEQ
+                 	<!-- 이름검색 -->
+					<if test='searchValue != null and searchValue != ""'>
+					   AND LOWER(REPLACE(B.PRODUCT_NAME,' ','')) LIKE LOWER(REPLACE('%' || #{searchValue} || '%',' ',''))
+					</if>
+					<if test='dateSearch != null and dateSearch!= ""'>
+					<choose>
+					<when test='dateSearch == "before"'>
+					<!-- 할인 시작전 -->
+					   AND A.DISCNT_START_DATE <![CDATA[>]]> TO_CHAR(SYSDATE,'YYYYMMDD')
+					</when>
+					<when test='dateSearch == "proceed"'>
+					<!--할인 기간내-->
+					   AND A.DISCNT_START_DATE <![CDATA[<=]]> TO_CHAR(SYSDATE,'YYYYMMDD')
+					   AND A.DISCNT_END_DATE <![CDATA[>=]]> TO_CHAR(SYSDATE,'YYYYMMDD')
+					</when>
+					<when test='dateSearch == "end"'>
+					<!--할인 종료 검색-->   
+					   AND A.DISCNT_END_DATE <![CDATA[<=]]> TO_CHAR(SYSDATE,'YYYYMMDD')
+					</when>
+					</choose>
+					</if>
+					<if test="discntStatus.equals('Y') or discntStatus.equals('N')">
+					<!--할인 적용여부-->
+					   AND A.DISCNT_STATUS = #{discntStatus}
+					</if>
+                 ORDER BY A.DISCNT_SEQ DESC))
+WHERE RNUM <![CDATA[>=]]>#{startRow}
+   AND RNUM <![CDATA[<=]]>#{endRow}
+
+</select>
+
+<!-- 할인시작날짜가 현재날짜와 같거나 이전이면서 종료날짜가 지나지않고 할인 적용이 안된 할인객체를 가져오는 쿼리 -->
+<select id="discntBeforeSubmit" resultMap="discntResultMap">
+SELECT DISCNT_SEQ,
+       PRODUCT_SEQ,
+       DISCNT_RATE,
+       DISCNT_START_DATE,
+       DISCNT_END_DATE,
+       DISCNT_STATUS
+  FROM TBL_DISCNT
+ WHERE DISCNT_STATUS = 'N'
+   AND DISCNT_START_DATE <![CDATA[<=]]> TO_CHAR(SYSDATE,'YYYYMMDD')
+   AND DISCNT_END_DATE <![CDATA[>=]]> TO_CHAR(SYSDATE,'YYYYMMDD')
+</select>
+
+<!-- 할인종료날짜가 현재날짜와 같거나 지났을때 할인해제가 안된 할인객체을 가져오는 쿼리 -->
+<select id="discntEndSubmit" resultMap="discntResultMap">
+
+SELECT DISCNT_SEQ,
+       PRODUCT_SEQ,
+       DISCNT_RATE,
+       DISCNT_START_DATE,
+       DISCNT_END_DATE,
+       DISCNT_STATUS
+  FROM TBL_DISCNT
+ WHERE DISCNT_STATUS='Y'
+   AND DISCNT_END_DATE <![CDATA[<]]> TO_CHAR(SYSDATE,'YYYYMMDD')
+
+</select>
+
+</mapper>

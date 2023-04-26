@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.game.web.dao.EGameDao">
+	<!-- 상품 resultMap -->
+	<resultMap type="com.game.web.model.Product" id="productResultMap">
+	<id column="PRODUCT_SEQ" property="productSeq"/>
+	<result column="USER_SELLER_ID" property="userSellerId"/>
+	<result column="DISCNT_SEQ" property="discntSeq"/>
+	<result column="PRODUCT_NAME" property="productName"/>
+	<result column="PRODUCT_PRICE" property="productPrice"/>
+	<result column="PRODUCT_CONTENT" property="productContent"/>
+	<result column="PRODUCT_BUY_CNT" property="productBuyCnt"/>
+	<result column="PAY_PRICE" property="payPrice"/>
+	<result column="REVIEW_CNT" property="reviewCnt"/>
+	<result column="PRODUCT_GRADE" property="productGrade"/>
+	<result column="PRODUCT_STATUS" property="productStatus"/>
+	</resultMap>
+	<!-- 상품 태그 resultMap -->
+	<resultMap type="com.game.web.model.ProductTag" id="productTagResultMap">
+	<id column="PRODUCT_SEQ" property="productSeq"/> 
+	<id column="TAG_NUM" property="tagNum"/>
+	</resultMap>
+	<resultMap type="com.game.web.model.Review" id="reviewResultMap">
+	<!-- 리뷰 모델 리졸트 맵 -->
+	<id column="REVIEW_SEQ" property="reviewSeq"/>
+	<result column="PRODUCT_SEQ" property="productSeq"/> 
+	<result column="USER_ID" property="userId"/>
+	<result column="REVIEW_CONTENT" property="reviewContent"/>
+	<result column="REVIEW_REG_DATE" property="reviewRegDate"/>
+	<result column="REVIEW_GOOD" property="reviewGood"/>
+	<result column="PRODUCT_GRADE" property="productGrade"/>
+	<result column="USER_IMG" property="userImg"/>
+	<result column="USER_NICKNAME" property="userNickName"/>
+	</resultMap>
+	<!-- 할인 테이블 리졸트 맵 -->
+	<resultMap type="com.game.web.model.Discnt" id="discntResultMap">
+	<id column="DISCNT_SEQ" property="discntSeq"/>
+	<result column="PRODUCT_SEQ" property="productSeq"/>
+	<result column="DISCNT_RATE" property="discntRate"/>
+	<result column="DISCNT_START_DATE" property="discntStartDate"/>
+	<result column="DISCNT_END_DATE" property="discntEndDate"/>
+	<result column="DISCNT_STATUS" property="discntStatus"/>
+	</resultMap>
+	<!-- Cart + 상품 -->
+	<resultMap type="com.game.web.model.Cart" id="cartResultMap">
+	<id column="PRODUCT_SEQ" property="productSeq" />
+	<id column="USER_ID" property="userId" />
+	<result column="CART_DATE" property="cartDate" />
+	<result column="USER_SELLER_ID" property="userSellerId"/>
+	<result column="DISCNT_SEQ" property="discntSeq"/>
+	<result column="PRODUCT_NAME" property="productName"/>
+	<result column="PRODUCT_PRICE" property="productPrice"/>
+	<result column="PRODUCT_CONTENT" property="productContent"/>
+	<result column="PRODUCT_BUY_CNT" property="productBuyCnt"/>
+	<result column="PAY_PRICE" property="payPrice"/>
+	<result column="REVIEW_CNT" property="reviewCnt"/>
+	<result column="PRODUCT_GRADE" property="productGrade"/>
+	<result column="PRODUCT_STATUS" property="productStatus"/>
+	</resultMap>
+	
+<!-- 상품 insert -->
+<insert id="productInsert" parameterType="com.game.web.model.Product">
+<!--  선행처리기(시퀀스생성)  -->
+<selectKey resultType="long" keyProperty="productSeq" order="BEFORE"> SELECT PRODUCT_SEQ.NEXTVAL FROM DUAL </selectKey>
+INSERT INTO TBL_PRODUCT (
+    PRODUCT_SEQ,
+    USER_SELLER_ID,
+    DISCNT_SEQ,
+    PRODUCT_NAME,
+    PRODUCT_PRICE,
+    PRODUCT_CONTENT,
+    PRODUCT_BUY_CNT,
+    PAY_PRICE,
+    REVIEW_CNT,
+    PRODUCT_GRADE,
+    PRODUCT_STATUS
+) VALUES (
+    #{productSeq},
+    #{userSellerId},
+    #{discntSeq},
+    #{productName},
+    #{productPrice},
+    #{productContent},
+    #{productBuyCnt},
+    #{payPrice},
+    #{reviewCnt},
+    #{productGrade},
+    #{productStatus}
+)
+
+</insert>
+
+<!-- 상품 태그 insert -->
+<insert id="productTagInsert" parameterType="com.game.web.model.ProductTag">
+INSERT INTO TBL_PRODUCT_TAG (
+    PRODUCT_SEQ,
+    TAG_NUM
+) VALUES (
+    #{productSeq},
+    #{tagNum}
+)
+</insert>
+
+<!-- 상품번호 가져오기(상품이름으로 검색) -->
+<select id="productSeqSelect" parameterType="String" resultType="long">
+SELECT PRODUCT_SEQ
+  FROM TBL_PRODUCT
+ WHERE PRODUCT_NAME = #{value}
+</select>
+
+<!-- 게시글 총 카운트 수  -->
+<select id="productListCnt" parameterType="com.game.web.model.ProductSearch" resultType="int">
+SELECT COUNT(PRODUCT_SEQ)
+  FROM
+(SELECT DISTINCT A.PRODUCT_SEQ
+  FROM TBL_PRODUCT A, TBL_PRODUCT_TAG B
+ WHERE A.PRODUCT_SEQ=B.PRODUCT_SEQ
+ AND A.PRODUCT_STATUS = 'Y'
+ <if test='productName != null and productName != ""'>
+    AND LOWER(REPLACE(A.PRODUCT_NAME,' ','')) LIKE LOWER(REPLACE('%' || #{productName} || '%',' ',''))
+ </if>
+ <if test='discntCheck != null and discntCheck == "Y"'>
+    AND A.DISCNT_SEQ <![CDATA[>=]]> 1
+ </if>
+ <if test='minPrice != null and minPrice !=""'>
+    AND A.PAY_PRICE <![CDATA[>=]]> #{minPrice}
+ </if>
+  <if test='maxPrice != null and maxPrice !=""'>
+    AND A.PAY_PRICE <![CDATA[<=]]> #{maxPrice}
+ </if>
+ <if test='tagParentNum != null and tagParentNum !=""'>
+    AND A.PRODUCT_SEQ IN (SELECT PRODUCT_SEQ
+                          FROM TBL_PRODUCT_TAG
+                         WHERE TAG_NUM = #{tagParentNum}
+     				<if test = 'tagNum != null'>
+     				<foreach collection="tagNum" item = "i">
+                           AND PRODUCT_SEQ IN 
+                           (SELECT PRODUCT_SEQ
+                              FROM TBL_PRODUCT_TAG
+                             WHERE TAG_NUM = #{i})                         
+     				</foreach>
+     				</if>               
+                             )
+ </if>
+ )
+</select>
+
+<!-- 상품 리스트(페이징) -->
+<select id="productList" parameterType="com.game.web.model.ProductSearch" resultMap="productResultMap">
+SELECT *
+  FROM(
+  SELECT ROWNUM AS RNUM,
+        PRODUCT_SEQ,
+        USER_SELLER_ID,
+        DISCNT_SEQ,
+        PRODUCT_NAME,
+        PRODUCT_PRICE,
+        PRODUCT_CONTENT,
+        PRODUCT_BUY_CNT,
+        PAY_PRICE,
+        REVIEW_CNT,
+        PRODUCT_GRADE,
+        PRODUCT_STATUS
+  FROM(
+SELECT
+    PRODUCT_SEQ,
+    NVL(USER_SELLER_ID,'') AS USER_SELLER_ID,
+    NVL(DISCNT_SEQ,0) AS DISCNT_SEQ,
+    NVL(PRODUCT_NAME,'') AS PRODUCT_NAME,
+    NVL(PRODUCT_PRICE,0) AS PRODUCT_PRICE,
+    NVL(PRODUCT_CONTENT,'') AS PRODUCT_CONTENT,
+    NVL(PRODUCT_BUY_CNT,0) AS PRODUCT_BUY_CNT,
+    NVL(PAY_PRICE,0) AS PAY_PRICE,
+    NVL(REVIEW_CNT,0) AS REVIEW_CNT,
+    NVL(PRODUCT_GRADE,0)AS PRODUCT_GRADE,
+    NVL(PRODUCT_STATUS,'N')AS PRODUCT_STATUS
+  FROM
+    TBL_PRODUCT
+ WHERE PRODUCT_SEQ IN 
+ (
+ SELECT DISTINCT A.PRODUCT_SEQ
+  FROM TBL_PRODUCT A, TBL_PRODUCT_TAG B
+ WHERE A.PRODUCT_SEQ=B.PRODUCT_SEQ
+   AND A.PRODUCT_STATUS = 'Y'
+   <if test='productName != null and productName != ""'>
+   AND LOWER(REPLACE(A.PRODUCT_NAME,' ','')) LIKE LOWER(REPLACE('%' || #{productName} || '%',' ',''))
+ </if>
+ <if test='discntCheck != null and discntCheck == "Y"'>
+    AND A.DISCNT_SEQ <![CDATA[>=]]> 1
+ </if>
+ <if test='minPrice != null and minPrice !=""'>
+    AND A.PAY_PRICE <![CDATA[>=]]> #{minPrice}
+ </if>
+  <if test='maxPrice != null and maxPrice !=""'>
+    AND A.PAY_PRICE <![CDATA[<=]]> #{maxPrice}
+ </if>
+ <if test='tagParentNum != null and tagParentNum !=""'>
+    AND A.PRODUCT_SEQ IN (SELECT PRODUCT_SEQ
+                          FROM TBL_PRODUCT_TAG
+                         WHERE TAG_NUM = #{tagParentNum}
+     				<if test = 'tagNum != null'>
+     				<foreach collection="tagNum" item = "i">
+                           AND PRODUCT_SEQ IN 
+                           (SELECT PRODUCT_SEQ
+                              FROM TBL_PRODUCT_TAG
+                             WHERE TAG_NUM = #{i})                         
+     				</foreach>
+     				</if>            )
+  </if>
+  )
+ <choose>
+ <when test='orderValue == null or orderValue == ""'>
+ 	ORDER BY PRODUCT_SEQ DESC
+ </when>
+ <when test = 'orderValue != null and orderValue != ""'>
+	 <choose>
+	 <when test='orderValue == "price_desc"'>ORDER BY PAY_PRICE DESC</when>
+	 <when test='orderValue == "price_asc"'>ORDER BY PAY_PRICE ASC</when>
+	 <when test='orderValue == "grade_desc"'>ORDER BY PRODUCT_GRADE DESC</when>
+	 <when test='orderValue == "grade_asc"'>ORDER BY PRODUCT_GRADE ASC</when>
+	 <when test='orderValue == "buy_cnt_desc"'>ORDER BY PRODUCT_BUY_CNT DESC</when>
+	 <when test='orderValue == "buy_cnt_asc"'>ORDER BY PRODUCT_BUY_CNT ASC</when>
+	 <when test='orderValue == "random"'>ORDER BY DBMS_RANDOM.RANDOM()</when>
+	 </choose> 
+ </when>
+ 
+ </choose>
+ ))
+ WHERE RNUM <![CDATA[>=]]>#{startRow}
+   AND RNUM <![CDATA[<=]]>#{endRow}
+</select>
+
+<!-- 태그번호 이름으로 전환 -->
+<select id="productTagNameSelect" parameterType="long" resultType="string">
+SELECT TAG_NAME
+  FROM TBL_PRODUCT_TAG A, TBL_TAG B
+ WHERE A.TAG_NUM = B.TAG_NUM
+   AND A.PRODUCT_SEQ = #{product_seq}
+</select>
+
+<!-- 상품 단일 객체 가져오기 -->
+<select id="productSelect" parameterType="long" resultMap="productResultMap">
+SELECT PRODUCT_SEQ,
+        USER_SELLER_ID,
+        NVL(DISCNT_SEQ,0) AS DISCNT_SEQ,
+        PRODUCT_NAME,
+        PRODUCT_PRICE,
+        NVL(PRODUCT_CONTENT,'') AS PRODUCT_CONTENT,
+        NVL(PRODUCT_BUY_CNT,0) AS PRODUCT_BUY_CNT,
+        PAY_PRICE,
+        NVL(REVIEW_CNT,0) AS REVIEW_CNT,
+        NVL(PRODUCT_GRADE,0) AS PRODUCT_GRADE,
+        NVL(PRODUCT_STATUS,'Y') AS PRODUCT_STATUS
+  FROM TBL_PRODUCT
+ WHERE PRODUCT_SEQ = #{value}
+   AND PRODUCT_STATUS = 'Y'
+
+</select>
+
+<!-- 상품당 리뷰 총 갯수 가져오기 -->
+<select id="reviewCount" parameterType="long" resultType="int">
+SELECT COUNT(REVIEW_SEQ)
+  FROM TBL_REVIEW
+ WHERE PRODUCT_SEQ = #{value}
+</select>
+
+<!-- 상품 리뷰 평점 합산값 가져오기 -->
+<select id="productGradeSum" parameterType="long" resultType="long">
+SELECT NVL(SUM(PRODUCT_GRADE),0)
+  FROM TBL_REVIEW
+ WHERE PRODUCT_SEQ = #{value} 
+</select>
+
+<!-- 상품 업데이트 쿼리 -->
+<update id="productUpdate" parameterType="com.game.web.model.Product">
+UPDATE TBL_PRODUCT
+SET
+    USER_SELLER_ID = #{userSellerId},
+    DISCNT_SEQ = #{discntSeq},
+    PRODUCT_NAME = #{productName},
+    PRODUCT_PRICE = #{productPrice},
+    PRODUCT_CONTENT = #{productContent},
+    PRODUCT_BUY_CNT = #{productBuyCnt},
+    PAY_PRICE = #{payPrice},
+    REVIEW_CNT = #{reviewCnt},
+    PRODUCT_GRADE = #{productGrade}
+WHERE PRODUCT_SEQ = #{productSeq}
+</update>
+
+<!-- 리뷰 리스트 가져오기 -->
+<select id="reviewList" parameterType="com.game.web.model.Review" resultMap="reviewResultMap">
+SELECT *
+FROM(SELECT ROWNUM RNUM,
+           REVIEW_SEQ,
+           PRODUCT_SEQ,
+           USER_ID,
+           REVIEW_CONTENT,
+           REVIEW_REG_DATE,
+           REVIEW_GOOD,
+           PRODUCT_GRADE,
+           USER_IMG,
+           USER_NICKNAME
+          FROM(
+          SELECT A.REVIEW_SEQ AS REVIEW_SEQ,
+                A.PRODUCT_SEQ AS PRODUCT_SEQ,
+                A.USER_ID AS USER_ID,
+                NVL(A.REVIEW_CONTENT, '') AS REVIEW_CONTENT,
+                NVL(TO_CHAR(A.REVIEW_REG_DATE, 'YYYY-MM-DD HH24:MI:SS'),'') AS REVIEW_REG_DATE,
+                NVL(A.REVIEW_GOOD,0) AS REVIEW_GOOD,
+                NVL(A.PRODUCT_GRADE,0) AS PRODUCT_GRADE,
+                B.USER_IMG AS USER_IMG,
+                NVL(B.USER_NICKNAME,'') AS USER_NICKNAME
+          FROM  TBL_REVIEW A , TBL_USER B
+         WHERE A.USER_ID = B.USER_ID
+           AND A.PRODUCT_SEQ = #{productSeq}
+           ORDER BY REVIEW_REG_DATE ASC
+          ))
+WHERE RNUM <![CDATA[>=]]>#{startRow}
+   AND RNUM <![CDATA[<=]]>#{endRow}
+</select>
+
+<!-- 단일 리뷰 가져오기 이름과 상품번호로 검색-->
+<select id="reviewSelect" parameterType="com.game.web.model.Review" resultMap="reviewResultMap">
+ SELECT A.REVIEW_SEQ AS REVIEW_SEQ,
+                A.PRODUCT_SEQ AS PRODUCT_SEQ,
+                A.USER_ID AS USER_ID,
+                NVL(A.REVIEW_CONTENT, '') AS REVIEW_CONTENT,
+                NVL(TO_CHAR(A.REVIEW_REG_DATE, 'YYYY-MM-DD HH24:MI:SS'),'') AS REVIEW_REG_DATE,
+                NVL(A.REVIEW_GOOD,0) AS REVIEW_GOOD,
+                NVL(A.PRODUCT_GRADE,0) AS PRODUCT_GRADE,
+                B.USER_IMG AS USER_IMG,
+                NVL(B.USER_NICKNAME,'') AS USER_NICKNAME
+          FROM  TBL_REVIEW A , TBL_USER B
+         WHERE A.USER_ID = B.USER_ID
+           AND A.PRODUCT_SEQ = #{productSeq}
+           AND A.USER_ID = #{userId}
+          
+</select>
+
+<!-- 리뷰단일 가져오기 리뷰번호로 검색 -->
+<select id="reviewSeqSelect" parameterType="long" resultMap="reviewResultMap">
+SELECT A.REVIEW_SEQ AS REVIEW_SEQ,
+                A.PRODUCT_SEQ AS PRODUCT_SEQ,
+                A.USER_ID AS USER_ID,
+                NVL(A.REVIEW_CONTENT, '') AS REVIEW_CONTENT,
+                NVL(TO_CHAR(A.REVIEW_REG_DATE, 'YYYY-MM-DD HH24:MI:SS'),'') AS REVIEW_REG_DATE,
+                NVL(A.REVIEW_GOOD,0) AS REVIEW_GOOD,
+                NVL(A.PRODUCT_GRADE,0) AS PRODUCT_GRADE,
+                B.USER_IMG AS USER_IMG,
+                NVL(B.USER_NICKNAME,'') AS USER_NICKNAME
+          FROM  TBL_REVIEW A , TBL_USER B
+          WHERE A.USER_ID = B.USER_ID
+ 			AND A.REVIEW_SEQ = #{value}
+</select>
+
+<!-- 리뷰 작성여부 체크 -->
+<select id="reviewCheck" parameterType="com.game.web.model.Review" resultType="int">
+SELECT COUNT(REVIEW_SEQ)
+  FROM TBL_REVIEW
+ WHERE PRODUCT_SEQ = #{productSeq}
+   AND USER_ID = #{userId}
+</select>
+
+<!-- 리뷰 작성 쿼리 -->
+<insert id="reviewInsert" parameterType="com.game.web.model.Review">
+<selectKey resultType="long" keyProperty="reviewSeq" order="BEFORE"> SELECT REVIEW_SEQ.NEXTVAL FROM DUAL </selectKey>
+INSERT INTO TBL_REVIEW (
+    REVIEW_SEQ,
+    PRODUCT_SEQ,
+    USER_ID,
+    REVIEW_CONTENT,
+    REVIEW_REG_DATE,
+    REVIEW_GOOD,
+    PRODUCT_GRADE
+) VALUES (
+    #{reviewSeq},
+    #{productSeq},
+    #{userId},
+    #{reviewContent},
+    SYSDATE,
+    0,
+    #{productGrade}
+)
+</insert>
+
+<!-- 리뷰 삭제 -->
+<delete id="reviewDelete" parameterType="long">
+DELETE FROM TBL_REVIEW
+WHERE REVIEW_SEQ = #{value}
+</delete>
+
+<!-- 리뷰 업데이트 -->
+<update id="reviewUpdate" parameterType="com.game.web.model.Review">
+UPDATE TBL_REVIEW
+SET
+    REVIEW_CONTENT = #{reviewContent},
+    REVIEW_REG_DATE = SYSDATE,
+    PRODUCT_GRADE = #{productGrade}
+WHERE REVIEW_SEQ = #{reviewSeq}
+</update>
+
+<!-- 상품 구매여부 체크 -->
+<select id="productBuyCheck" parameterType="com.game.web.model.Pay" resultType="int">
+SELECT COUNT(USER_ID)
+  FROM TBL_PAY
+ WHERE PAY_STATUS = 1
+   AND PAY_METHOD = 'p'
+   AND PRODUCT_SEQ = #{productSeq}
+   AND USER_ID = #{userId}
+</select>
+
+<!-- 장바구니 보유여부 체크 -->
+<select id="cartCheck" parameterType="com.game.web.model.Cart" resultType="int">
+SELECT COUNT(USER_ID)
+  FROM TBL_CART
+ WHERE PRODUCT_SEQ = #{productSeq}
+   AND USER_ID = #{userId}
+</select>
+
+<!-- 장바구니 추가 -->
+<insert id="cartInsert" parameterType="com.game.web.model.Cart">
+INSERT INTO TBL_CART
+VALUES
+(
+    #{productSeq},
+    #{userId},
+    SYSDATE
+) 
+</insert>
+<!-- 장바구니 삭제 -->
+<delete id="cartDelete" parameterType="com.game.web.model.Cart">
+DELETE TBL_CART
+ WHERE PRODUCT_SEQ = #{productSeq}
+   AND USER_ID = #{userId}
+</delete>
+
+<!-- 장바구니 상품목록 조회 -->
+<select id="cartSelect" parameterType="String" resultMap="cartResultMap">
+	SELECT B.PRODUCT_SEQ,
+	       A.USER_SELLER_ID,
+	       NVL(A.DISCNT_SEQ, 0) AS DISCNT_SEQ,
+	       A.PRODUCT_NAME,
+	       A.PRODUCT_PRICE,
+	       NVL(A.PRODUCT_CONTENT, '') AS PRODUCT_CONTENT,
+	       NVL(A.PRODUCT_BUY_CNT ,0) AS PRODUCT_BUY_CNT,
+	       A.PAY_PRICE,
+	       NVL(A.REVIEW_CNT, 0) AS REVIEW_CNT,
+	       NVL(A.PRODUCT_GRADE, 0) AS PRODUCT_GRADE,
+	       NVL(A.PRODUCT_STATUS, 'Y') AS PRODUCT_STATUS
+	  FROM TBL_PRODUCT A, (SELECT PRODUCT_SEQ,
+	                              USER_ID,
+	                              CART_DATE
+	                         FROM TBL_CART
+	                        WHERE USER_ID = #{value}) B
+	 WHERE A.PRODUCT_SEQ = B.PRODUCT_SEQ
+	   AND A.PRODUCT_STATUS = 'Y'
+	 ORDER BY CART_DATE
+</select>
+
+<!-- 할인테이블 셀렉트 -->
+<select id="discntSelect" parameterType="long" resultMap="discntResultMap">
+SELECT
+    DISCNT_SEQ,
+    PRODUCT_SEQ,
+    DISCNT_RATE,
+    DISCNT_START_DATE,
+    DISCNT_END_DATE,
+    DISCNT_STATUS
+  FROM
+    TBL_DISCNT
+ WHERE DISCNT_SEQ = #{value}
+   AND DISCNT_END_DATE >= TO_CHAR(SYSDATE,'YYYYMMDD')
+   AND DISCNT_STATUS = 'Y'
+</select>
+
+<!-- 상품 구매 카운트 업데이트 -->
+<update id="buyCountUpdate" parameterType="com.game.web.model.Product">
+	UPDATE TBL_PRODUCT
+	   SET PRODUCT_BUY_CNT = PRODUCT_BUY_CNT + 1
+	 WHERE PRODUCT_SEQ = #{productSeq}
+</update>
+
+<!-- 상품 환불 카운트 업데이트 -->
+<update id="refundCountUpdate" parameterType="com.game.web.model.Product">
+	UPDATE TBL_PRODUCT
+	   SET PRODUCT_BUY_CNT = PRODUCT_BUY_CNT - 1
+	 WHERE PRODUCT_SEQ = #{productSeq}
+</update>
+
+</mapper>

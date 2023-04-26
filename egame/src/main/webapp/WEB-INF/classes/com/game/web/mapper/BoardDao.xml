@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.game.web.dao.BoardDao">
+	<!-- 공지사항 reusltMap -->
+	<resultMap type="com.game.web.model.Notice" id="noticeResultMap" >
+		<id column="NOTICE_SEQ" property="noticeSeq" />
+		<result column="ADMIN_ID" property="adminId" />
+		<result column="NOTICE_TITLE" property="noticeTitle" />
+		<result column="NOTICE_CONTENT" property="noticeContent" />
+		<result column="NOTICE_REG_DATE" property="noticeRegDate" />
+	</resultMap>
+	
+	<!-- 문의 resultMap -->
+	<resultMap type="com.game.web.model.Qna" id="qnaResultMap" >
+		<id column="QNA_SEQ" property="qnaSeq" />
+		<result column="USER_ID" property="userId" />
+		<result column="QNA_TITLE" property="qnaTitle" />
+		<result column="QNA_CONTENT" property="qnaContent" />
+		<result column="QNA_REG_DATE" property="qnaRegDate" />
+		<result column="QNA_PARENT" property="qnaParent" />
+		<result column="QNA_STATUS" property="qnaStatus" />
+	</resultMap>
+	
+	<!-- 신고 resultMap -->
+	<resultMap type="com.game.web.model.Report" id="reportResultMap">
+		<id column="REPORT_SEQ" property="reportSeq" />
+		<result column="USER_ID" property="userId" />
+		<result column="PRODUCT_SEQ" property="productSeq" />
+		<result column="REVIEW_SEQ" property="reviewSeq" />
+		<result column="REPORT_CONTENT" property="reportContent" />
+		<result column="REPORT_REG_DATE" property="reportRegDate" />
+		<result column="REPORT_STATUS" property="reportStatus" />
+		<result column="REPORT_PR" property="reportPr" />
+		<result column="REPORT_TAG" property="reportTag" />
+	</resultMap>
+
+<!-- 공지사항 게시물 등록 -->
+<insert id="noticeInsert" parameterType="com.game.web.model.Notice">
+<selectKey resultType="long" keyProperty="noticeSeq" order="BEFORE">
+	SELECT NOTICE_SEQ.NEXTVAL FROM DUAL
+</selectKey>
+	INSERT INTO TBL_NOTICE (
+		NOTICE_SEQ,
+		ADMIN_ID,
+		NOTICE_TITLE,
+		NOTICE_CONTENT,
+		NOTICE_REG_DATE
+	) VALUES (
+		#{noticeSeq},
+		#{adminId},
+		#{noticeTitle},
+		#{noticeContent},
+		SYSDATE
+	)
+</insert>
+
+<!-- 공지사항 총 게시물 수 -->
+<select id="noticeListCount" parameterType="com.game.web.model.Notice" resultType="long">
+	SELECT COUNT(NOTICE_SEQ) AS CNT
+	   FROM TBL_NOTICE A, TBL_USER B
+	  WHERE A.ADMIN_ID = B.USER_ID
+	<if test='searchValue != null and searchValue != ""'>
+		AND A.NOTICE_TITLE LIKE '%' || #{searchValue} || '%'
+	</if>
+</select>
+
+<!-- 공지사항 게시물 리스트 -->
+<select id="noticeList" parameterType="com.game.web.model.Notice" resultMap="noticeResultMap">
+SELECT NOTICE_SEQ,
+       ADMIN_ID,
+       NOTICE_TITLE,
+       NOTICE_CONTENT,
+       NOTICE_REG_DATE
+  FROM (SELECT ROWNUM AS RNUM,
+		       NOTICE_SEQ,
+               ADMIN_ID,
+               NOTICE_TITLE,
+               NOTICE_CONTENT,
+               NOTICE_REG_DATE
+		       FROM (SELECT A.NOTICE_SEQ,
+		                    A.ADMIN_ID,
+		                    NVL(A.NOTICE_TITLE, '') AS NOTICE_TITLE,
+		                    NVL(A.NOTICE_CONTENT, '') AS NOTICE_CONTENT,
+		                    NVL(TO_CHAR(A.NOTICE_REG_DATE, 'YYYY.MM.DD'), '') AS NOTICE_REG_DATE
+		               FROM TBL_NOTICE A, TBL_USER B
+		              WHERE A.ADMIN_ID = B.USER_ID
+<if test='searchValue != null and searchValue != ""'>
+						AND A.NOTICE_TITLE LIKE '%' || #{searchValue} ||'%'
+</if>
+					  ORDER BY NOTICE_SEQ DESC))
+ WHERE RNUM <![CDATA[>=]]> #{startRow}
+   AND RNUM <![CDATA[<=]]> #{endRow}
+</select>
+
+<!-- 공지사항 조회 -->
+<select id="noticeSelect" parameterType="long" resultMap="noticeResultMap">
+	SELECT A.NOTICE_SEQ,
+	       A.ADMIN_ID,
+	       NVL(A.NOTICE_TITLE, '') AS NOTICE_TITLE,
+	       NVL(A.NOTICE_CONTENT, '') AS NOTICE_CONTENT,
+	       NVL(TO_CHAR(A.NOTICE_REG_DATE, 'YYYY.MM.DD'), '') AS NOTICE_REG_DATE
+	  FROM TBL_NOTICE A, TBL_USER B
+	 WHERE A.NOTICE_SEQ = #{value}
+	   AND A.ADMIN_ID = B.USER_ID
+</select>
+
+<!-- 공지사항 수정 -->
+<update id="noticeUpdate" parameterType="com.game.web.model.Notice">
+	UPDATE TBL_NOTICE
+	   SET NOTICE_TITLE = #{noticeTitle},
+	   	   NOTICE_CONTENT = #{noticeContent}
+   	 WHERE NOTICE_SEQ = #{noticeSeq}
+</update>
+
+<!-- 문의 삭제 -->
+<delete id="noticeDelete" parameterType="long">
+	DELETE FROM TBL_NOTICE
+	 WHERE NOTICE_SEQ = #{value}
+</delete>
+
+<!-- 문의 게시물 수 -->
+<select id="qnaListCount" parameterType="com.game.web.model.Qna" resultType="long">
+	SELECT COUNT(QNA_SEQ) AS CNT
+	   FROM TBL_QNA A, TBL_USER B
+	  WHERE 1 = 1
+	<if test='userId != null and userId != "test"'>
+		AND A.USER_ID = #{userId}
+    </if>
+    	AND A.QNA_PARENT IS NULL
+	  	AND A.USER_ID = B.USER_ID
+	<if test='searchValue != null and searchValue != ""'>
+		AND A.QNA_TITLE LIKE '%' || #{searchValue} || '%'
+	</if>
+</select>
+
+<!-- 문의 리스트 -->
+<select id="qnaList" parameterType="com.game.web.model.Qna" resultMap="qnaResultMap">
+SELECT QNA_SEQ,
+       USER_ID,
+       QNA_TITLE,
+       QNA_CONTENT,
+       QNA_REG_DATE,
+       QNA_PARENT,
+       QNA_STATUS
+  FROM (SELECT ROWNUM AS RNUM,
+		       QNA_SEQ,
+               USER_ID,
+               QNA_TITLE,
+               QNA_CONTENT,
+               QNA_REG_DATE,
+               QNA_PARENT,
+               QNA_STATUS
+		       FROM (SELECT A.QNA_SEQ,
+		                    A.USER_ID,
+		                    NVL(A.QNA_TITLE, '') AS QNA_TITLE,
+		                    NVL(A.QNA_CONTENT, '') AS QNA_CONTENT,
+		                    NVL(TO_CHAR(A.QNA_REG_DATE, 'YYYY.MM.DD'), '') AS QNA_REG_DATE,
+                            NVL(A.QNA_PARENT, 0) AS QNA_PARENT,
+                  CASE WHEN NVL(A.QNA_STATUS, 'N') = 'N' THEN '확인중'
+                       WHEN NVL(A.QNA_STATUS, 'N') = 'Y' THEN '답변완료' END AS QNA_STATUS
+		               FROM TBL_QNA A, TBL_USER B
+		              WHERE 1 = 1
+		              <if test='userId != null and userId != "test"'>
+		              	AND A.USER_ID = #{userId}
+       				  </if>
+		              	AND A.QNA_PARENT IS NULL
+		              	AND A.USER_ID = B.USER_ID
+					  <if test='searchValue != null and searchValue != ""'>
+						AND A.QNA_TITLE LIKE '%' || #{searchValue} ||'%'
+					  </if>
+					  ORDER BY QNA_SEQ DESC))
+ WHERE RNUM <![CDATA[>=]]> #{startRow}
+   AND RNUM <![CDATA[<=]]> #{endRow}
+</select>
+
+<!-- 문의 게시물 등록 -->
+<insert id="qnaInsert" parameterType="com.game.web.model.Qna">
+<selectKey resultType="long" keyProperty="qnaSeq" order="BEFORE">
+	SELECT QNA_SEQ.NEXTVAL FROM DUAL
+</selectKey>
+	INSERT INTO TBL_QNA (
+		QNA_SEQ,
+		USER_ID,
+		QNA_TITLE,
+		QNA_CONTENT,
+		QNA_REG_DATE,
+		QNA_STATUS
+	) VALUES (
+		#{qnaSeq},
+		#{userId},
+		#{qnaTitle},
+		#{qnaContent},
+		SYSDATE,
+		#{qnaStatus}
+	)
+</insert>
+
+<!-- 문의 조회 시작 -->
+<select id="qnaSelect" parameterType="long" resultMap="qnaResultMap">
+	SELECT A.QNA_SEQ,
+	       A.USER_ID,
+	       NVL(A.QNA_TITLE, '') AS QNA_TITLE,
+	       NVL(A.QNA_CONTENT, '') AS QNA_CONTENT,
+	       NVL(TO_CHAR(A.QNA_REG_DATE, 'YYYY.MM.DD HH24:MI:SS'), '') AS QNA_REG_DATE,
+	       NVL(A.QNA_PARENT, 0) AS QNA_PARENT,
+ CASE WHEN NVL(A.QNA_STATUS, 'N') = 'N' THEN '확인중'
+      WHEN NVL(A.QNA_STATUS, 'N') = 'Y' THEN '답변완료' END AS QNA_STATUS
+	  FROM TBL_QNA A, TBL_USER B
+	 WHERE A.QNA_SEQ = #{value}
+	   AND A.USER_ID = B.USER_ID
+</select>
+
+<!-- 문의 답변 조회 시작 -->
+<select id="qnaReplySelect" parameterType="long" resultMap="qnaResultMap">
+	SELECT QNA_SEQ,
+	       USER_ID,
+	       QNA_CONTENT,
+	       QNA_REG_DATE,
+	       QNA_PARENT
+	  FROM (SELECT A.QNA_SEQ,
+	       A.USER_ID,
+	       NVL(A.QNA_CONTENT, '') AS QNA_CONTENT,
+	       NVL(TO_CHAR(A.QNA_REG_DATE, 'YYYY.MM.DD HH24:MI:SS'), '') AS QNA_REG_DATE,
+	       NVL(A.QNA_PARENT, 0) AS QNA_PARENT
+	  FROM TBL_QNA A, TBL_USER B
+	 WHERE A.QNA_PARENT = #{value}
+	   AND A.USER_ID = B.USER_ID)
+</select>
+
+<!-- 문의 처리상태 업데이트 -->
+<update id="qnaStatusUpdate" parameterType="com.game.web.model.Qna">
+	UPDATE TBL_QNA
+	   SET QNA_STATUS = 'Y'
+	 WHERE QNA_SEQ = #{value}
+</update>
+
+<!-- 문의 답변 등록 -->
+<insert id="qnaReplyInsert" parameterType="com.game.web.model.Qna">
+<selectKey resultType="long" keyProperty="qnaSeq" order="BEFORE">
+	SELECT QNA_SEQ.NEXTVAL FROM DUAL
+</selectKey>
+	INSERT INTO TBL_QNA (
+		QNA_SEQ,
+		USER_ID,
+		QNA_TITLE,
+		QNA_CONTENT,
+		QNA_REG_DATE,
+		QNA_PARENT,
+		QNA_STATUS
+	) VALUES (
+		#{qnaSeq},
+		#{userId},
+		#{qnaTitle},
+		#{qnaContent},
+		SYSDATE,
+		#{qnaParent},
+		#{qnaStatus}
+	)
+</insert>
+
+<!-- 문의 수정 -->
+<update id="qnaUpdate" parameterType="com.game.web.model.Qna">
+	UPDATE TBL_QNA
+	   SET QNA_TITLE = #{qnaTitle},
+	   	   QNA_CONTENT = #{qnaContent}
+   	 WHERE QNA_SEQ = #{qnaSeq}
+</update>
+
+<!-- 문의 삭제시 답변 조회 -->
+<select id="qnaAnswerCount" parameterType="long" resultType="int">
+	SELECT COUNT(QNA_SEQ) AS CNT
+	  FROM TBL_QNA
+     WHERE QNA_PARENT = #{value}
+</select>
+
+<!-- 문의 삭제 -->
+<delete id="qnaDelete" parameterType="long">
+	DELETE FROM TBL_QNA
+	 WHERE QNA_SEQ = #{value}
+</delete>
+
+<!-- 신고 게시물 수 -->
+<select id="reportListCount" parameterType="com.game.web.model.Report" resultType="long">
+	SELECT COUNT(REPORT_SEQ) AS CNT
+	   FROM TBL_REPORT A, TBL_USER B
+	  WHERE 1 = 1
+	<choose>
+		<when test='searchPr == "전체"'>
+			AND A.REPORT_PR LIKE '%'
+			
+		</when>
+		<when test='(searchPr == null or searchPr == "") and (searchTag == null or searchTag == "")'>
+			AND A.REPORT_PR LIKE '%'
+			
+		</when>
+		<otherwise>
+			<choose>
+				<when test='searchPr != "전체" and searchTag == "전체"'>
+					AND A.REPORT_PR = #{searchPr}
+					AND A.REPORT_TAG LIKE '%'
+			  	</when>
+			  	<when test='searchPr != "전체" and searchTag != "전체"'>
+			  		AND A.REPORT_PR = #{searchPr}
+					AND A.REPORT_TAG = #{searchTag}
+			  	</when>
+		  	</choose>
+		</otherwise>
+  	</choose>
+	<if test='searchValueOption != null and searchValueOption == "내용"'>
+		AND A.REPORT_CONTENT LIKE '%' || #{searchValue} || '%'
+	</if>
+	<if test='searchValueOption != null and searchValueOption == "아이디"'>
+		AND A.USER_ID LIKE '%' || #{searchValue} || '%'
+	</if>
+	  	AND A.USER_ID = B.USER_ID
+</select>
+
+<select id="reportList" parameterType="com.game.web.model.Report" resultMap="reportResultMap">
+SELECT REPORT_SEQ,
+       USER_ID,
+       PRODUCT_SEQ,
+       REVIEW_SEQ,
+       REPORT_CONTENT,
+       REPORT_REG_DATE,
+       REPORT_STATUS,
+       REPORT_PR,
+       REPORT_TAG
+  FROM (SELECT ROWNUM AS RNUM,
+		       REPORT_SEQ,
+               USER_ID,
+               PRODUCT_SEQ,
+               REVIEW_SEQ,
+               REPORT_CONTENT,
+               REPORT_REG_DATE,
+               REPORT_STATUS,
+               REPORT_PR,
+               REPORT_TAG
+		       FROM (SELECT A.REPORT_SEQ,
+		                    A.USER_ID,
+		                    A.PRODUCT_SEQ,
+                            A.REVIEW_SEQ,
+		                    NVL(A.REPORT_CONTENT, '') AS REPORT_CONTENT,
+		                    NVL(TO_CHAR(A.REPORT_REG_DATE, 'YYYY.MM.DD HH24:MI:SS'), '') AS REPORT_REG_DATE,
+                            NVL(A.REPORT_STATUS, '') AS REPORT_STATUS,
+                            NVL(A.REPORT_PR, '') AS REPORT_PR,
+                            NVL(A.REPORT_TAG, '') AS REPORT_TAG
+		               FROM TBL_REPORT A, TBL_USER B
+		              WHERE 1=1
+		             <choose>
+						<when test='searchPr == "전체"'>
+							AND A.REPORT_PR LIKE '%'
+							
+						</when>
+						<when test='(searchPr == null or searchPr == "") and (searchTag == null or searchTag == "")'>
+							AND A.REPORT_PR LIKE '%'
+							
+						</when>
+						<otherwise>
+							<choose>
+								<when test='searchPr != "전체" and searchTag == "전체"'>
+									AND A.REPORT_PR = #{searchPr}
+									AND A.REPORT_TAG LIKE '%'
+							  	</when>
+							  	<when test='searchPr != "전체" and searchTag != "전체"'>
+							  		AND A.REPORT_PR = #{searchPr}
+									AND A.REPORT_TAG = #{searchTag}
+							  	</when>
+						  	</choose>
+						</otherwise>
+				  	</choose>
+					<if test='searchValueOption != null and searchValueOption == "내용"'>
+						AND A.REPORT_CONTENT LIKE '%' || #{searchValue} || '%'
+					</if>
+					<if test='searchValueOption != null and searchValueOption == "아이디"'>
+						AND A.USER_ID LIKE '%' || #{searchValue} || '%'
+					</if>
+					  	AND A.USER_ID = B.USER_ID
+					  ORDER BY REPORT_SEQ DESC))
+ WHERE RNUM <![CDATA[>=]]> #{startRow}
+   AND RNUM <![CDATA[<=]]> #{endRow}
+</select>
+
+<!-- 신고 조회 -->
+<select id="reportSelect" parameterType="long" resultMap="reportResultMap">
+	SELECT A.REPORT_SEQ,
+	       A.USER_ID,
+	       NVL(A.PRODUCT_SEQ, 0) AS PRODUCT_SEQ,
+	       NVL(A.REVIEW_SEQ, 0) AS REVIEW_SEQ,
+	       NVL(A.REPORT_PR, '') AS REPORT_PR,
+	       NVL(A.REPORT_TAG, '') AS REPORT_TAG,
+	       NVL(A.REPORT_CONTENT, '') AS REPORT_CONTENT,
+	       NVL(TO_CHAR(A.REPORT_REG_DATE, 'YYYY.MM.DD HH24:MI:SS'), '') AS REPORT_REG_DATE,
+ CASE WHEN NVL(A.REPORT_STATUS, 'N') = 'N' THEN '미처리'
+      WHEN NVL(A.REPORT_STATUS, 'N') = 'Y' THEN '처리완료' END AS REPORT_STATUS
+	  FROM TBL_REPORT A, TBL_USER B
+	 WHERE A.REPORT_SEQ = #{value}
+	   AND A.USER_ID = B.USER_ID
+</select>
+
+<!-- 신고 처리상태 수정 -->
+<update id="reportStatusUpdate" parameterType="com.game.web.model.Report">
+	UPDATE TBL_REPORT
+	   SET REPORT_STATUS = #{reportStatus}
+   	 WHERE REPORT_SEQ = #{reportSeq}
+</update>
+
+<!-- 신고 등록 -->
+<insert id="reportInsert" parameterType="com.game.web.model.Report">
+<selectKey resultType="long" keyProperty="reportSeq" order="BEFORE">
+	SELECT REPORT_SEQ.NEXTVAL FROM DUAL
+</selectKey>
+	INSERT INTO TBL_REPORT (
+		REPORT_SEQ,
+		USER_ID,
+		PRODUCT_SEQ,
+		REVIEW_SEQ,
+		REPORT_CONTENT,
+		REPORT_REG_DATE,
+		REPORT_STATUS,
+		REPORT_PR,
+		REPORT_TAG
+	) VALUES (
+		#{reportSeq},
+		#{userId},
+		#{productSeq},
+		#{reviewSeq},
+		#{reportContent},
+		SYSDATE,
+		'N',
+		#{reportPr},
+		#{reportTag}
+	)
+</insert>
+
+</mapper>

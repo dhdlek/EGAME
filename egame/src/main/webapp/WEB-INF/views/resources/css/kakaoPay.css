@@ -1,0 +1,11 @@
+.kakaoPay {
+	display: inline-block;
+}
+
+.kakaoPay h2 {
+	color: #ffffff;
+	text-align: center;
+	font-weight: 700;
+	padding-top : 25px;
+	padding-bottom: 25px;
+}

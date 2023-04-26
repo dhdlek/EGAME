@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.game.web.dao.PayDao">
+	<!-- 결제 resultMap -->
+	<resultMap type="com.game.web.model.Pay" id="payResultMap">
+	<id column="PAY_SEQ" property="paySeq"/>
+	<result column="PRODUCT_SEQ" property="productSeq"/>
+	<result column="PRODUCT_NAME" property="productName"/>
+	<result column="PRODUCT_STATUS" property="productStatus"/>
+	<result column="USER_ID" property="userId"/>
+	<result column="PAY_PRICE" property="payPrice"/>
+	<result column="PAY_DATE" property="payDate"/>
+	<result column="PAY_STATUS" property="payStatus"/>
+	<result column="PAY_METHOD" property="payMethod"/>
+	</resultMap>
+	
+	<!-- 포인트 resultMap -->
+	<resultMap type="com.game.web.model.UserPoint" id="userPointResultMap">
+	<id column="POINT_SEQ" property="pointSeq"/>
+	<id column="PAY_SEQ" property="paySeq"/>
+	<result column="PRODUCT_SEQ" property="productSeq"/>
+	<result column="PRODUCT_NAME" property="productName"/>
+	<result column="USER_ID" property="userId"/>
+	<result column="POINT_POS" property="pointPos"/>
+	<result column="POINT_VAR" property="pointVar"/>
+	<result column="POINT_STATUS" property="pointStatus"/>
+	<result column="POINT_DATE" property="pointDate"/>
+	<result column="PAY_PRICE" property="payPrice"/>
+	<result column="PAY_STATUS" property="payStatus"/>
+	<result column="PAY_METHOD" property="payMethod"/>
+	</resultMap>
+	
+
+<!-- 결제 등록 -->
+<insert id="payInsert" parameterType="com.game.web.model.Pay">
+<!-- 선행처리기(시퀀스 생성) -->
+<selectKey resultType="long" keyProperty="paySeq" order="BEFORE">
+	SELECT SEQ_PAY_SEQ.NEXTVAL FROM DUAL
+</selectKey>
+INSERT INTO TBL_PAY (
+    PAY_SEQ,
+    PRODUCT_SEQ,
+    USER_ID,
+    PAY_PRICE,
+    PAY_DATE,
+    PAY_STATUS,
+    PAY_METHOD
+) VALUES (
+    #{paySeq},
+    #{productSeq},
+    #{userId},
+    #{payPrice},
+    SYSDATE,
+    #{payStatus},
+    #{payMethod}
+)
+</insert>
+
+<!-- 보유게임 수 -->
+<select id="libraryCount" parameterType="String" resultType="long">
+	SELECT COUNT(PAY_SEQ) AS CNT
+  	  FROM TBL_PAY
+ 	 WHERE USER_ID = #{value}
+   	   AND PAY_STATUS = '1'
+   	   AND PAY_METHOD = 'p'
+</select>
+
+<!-- 보유게임 리스트 -->
+<select id="libraryList" parameterType="com.game.web.model.Pay" resultMap="payResultMap">
+	SELECT PAY_SEQ,
+		   PRODUCT_SEQ,
+		   PRODUCT_NAME,
+       	   PAY_DATE,
+       	   PAY_STATUS,
+           PRODUCT_STATUS
+  	  FROM (SELECT ROWNUM AS RNUM,
+               	   PAY_SEQ,
+               	   PRODUCT_SEQ,
+               	   PRODUCT_NAME,
+               	   PAY_DATE,
+               	   PAY_STATUS,
+               	   PRODUCT_STATUS
+          	  FROM (SELECT A.PAY_SEQ,
+          	  			   NVL(A.PRODUCT_SEQ, '') AS PRODUCT_SEQ,
+                       	   NVL(B.PRODUCT_NAME, '') AS PRODUCT_NAME,
+                       	   NVL(TO_CHAR(A.PAY_DATE, 'YYYY.MM.DD'), '') AS PAY_DATE,
+                       	   A.PAY_STATUS,
+                       	   B.PRODUCT_STATUS
+                  	  FROM TBL_PAY A, TBL_PRODUCT B
+                 	 WHERE A.PRODUCT_SEQ = B.PRODUCT_SEQ
+                 	   AND A.USER_ID = #{userId}
+                   	   AND A.PAY_STATUS = '1'
+                	 ORDER BY A.PAY_SEQ DESC))
+	 WHERE RNUM <![CDATA[>=]]> #{startRow}
+	   AND RNUM <![CDATA[<=]]> #{endRow}
+</select>
+
+<select id="libraryAllList" parameterType="com.game.web.model.Pay" resultMap="payResultMap">
+	SELECT A.PAY_SEQ,
+		   NVL(A.PRODUCT_SEQ, '') AS PRODUCT_SEQ,
+       	   NVL(B.PRODUCT_NAME, '') AS PRODUCT_NAME,
+       	   A.USER_ID,
+       	   A.PAY_PRICE,
+       	   NVL(TO_CHAR(A.PAY_DATE, 'YYYY.MM.DD HH24:MI:SS'), '') AS PAY_DATE,
+       	   A.PAY_STATUS,
+       	   A.PAY_METHOD
+  	  FROM TBL_PAY A, TBL_PRODUCT B
+ 	 WHERE A.PRODUCT_SEQ = B.PRODUCT_SEQ
+ 	   AND A.USER_ID = #{userId}
+   	   AND A.PAY_STATUS = '1'
+	 ORDER BY A.PAY_SEQ DESC
+</select>
+
+<!-- 보유게임 조회 -->
+<select id="librarySelect" parameterType="long" resultMap="payResultMap">
+	SELECT A.PAY_SEQ,
+   		   NVL(A.PRODUCT_SEQ, '') AS PRODUCT_SEQ,
+       	   NVL(B.PRODUCT_NAME, '') AS PRODUCT_NAME,
+       	   A.USER_ID,
+       	   A.PAY_PRICE,
+       	   NVL(TO_CHAR(A.PAY_DATE, 'YYYY.MM.DD HH24:MI:SS'), '') AS PAY_DATE,
+       	   A.PAY_STATUS,
+       	   A.PAY_METHOD
+  	  FROM TBL_PAY A, TBL_PRODUCT B
+ 	 WHERE A.PRODUCT_SEQ = B.PRODUCT_SEQ
+ 	   AND A.PAY_SEQ = #{value}
+   	   AND PAY_STATUS = '1'
+</select>
+
+<!-- 보유게임 환불 -->
+<update id="libraryRefund" parameterType="com.game.web.model.Pay">
+	UPDATE TBL_PAY
+   	   SET PAY_STATUS = '0'
+ 	 WHERE PAY_SEQ = #{paySeq}
+</update>
+
+
+
+<!-- 포인트 등록 -->
+<insert id="userPointInsert" parameterType="com.game.web.model.UserPoint">
+<!-- 선행처리기(시퀀스 생성) -->
+<selectKey resultType="long" keyProperty="pointSeq" order="BEFORE">
+	SELECT SEQ_POINT_SEQ.NEXTVAL FROM DUAL
+</selectKey>
+INSERT INTO TBL_POINT (
+    POINT_SEQ,
+    PAY_SEQ,
+    USER_ID,
+    POINT_POS,
+    POINT_VAR,
+    POINT_STATUS,
+    POINT_DATE
+) VALUES (
+    #{pointSeq},
+    #{paySeq},
+    #{userId},
+    #{pointPos},
+    #{pointVar},
+    #{pointStatus},
+    SYSDATE
+)
+</insert>
+
+<!-- 포인트내역 수 -->
+<select id="pointCount" parameterType="String" resultType="long">
+	SELECT COUNT(POINT_SEQ) AS CNT
+  	  FROM TBL_POINT
+ 	 WHERE USER_ID = #{value}
+</select>
+
+<!-- 포인트내역 리스트 -->
+<select id="pointList" parameterType="com.game.web.model.UserPoint" resultMap="userPointResultMap">
+	SELECT POINT_SEQ,
+		   PRODUCT_SEQ,
+	       PRODUCT_NAME,
+	       POINT_POS,
+	       POINT_VAR,
+	       POINT_STATUS,
+	       POINT_DATE,
+	       PAY_STATUS,
+	       PAY_METHOD
+	  FROM (SELECT ROWNUM AS RNUM,
+	               POINT_SEQ,
+	               PRODUCT_SEQ,
+	               PRODUCT_NAME,
+	               POINT_POS,
+	               POINT_VAR,
+	               POINT_STATUS,
+	               POINT_DATE,
+	               PAY_STATUS,
+	               PAY_METHOD
+	          FROM (SELECT A.POINT_SEQ,
+	          			   NVL(B.PRODUCT_SEQ, '') AS PRODUCT_SEQ,
+	                       NVL(C.PRODUCT_NAME, '') AS PRODUCT_NAME,
+	                       NVL(A.POINT_POS, 0) AS POINT_POS,
+                       	   NVL(A.POINT_VAR, 0) AS POINT_VAR,
+	                       A.POINT_STATUS,
+	                       NVL(TO_CHAR(A.POINT_DATE, 'YYYY.MM.DD HH24:MI:SS'), '') AS POINT_DATE,
+	                       B.PAY_STATUS,
+	                       B.PAY_METHOD
+	                  FROM TBL_POINT A, TBL_PAY B LEFT JOIN TBL_PRODUCT C
+	                    ON B.PRODUCT_SEQ = C.PRODUCT_SEQ
+	                 WHERE A.PAY_SEQ = B.PAY_SEQ
+	                   AND A.USER_ID = #{userId}
+	                 ORDER BY A.POINT_SEQ DESC))
+	 WHERE RNUM <![CDATA[>=]]> #{startRow}
+	   AND RNUM <![CDATA[<=]]> #{endRow}
+</select>
+
+<!-- 포인트내역 조회 -->
+<select id="pointSelect" parameterType="long" resultMap="userPointResultMap">
+	SELECT A.POINT_SEQ,
+	       A.PAY_SEQ,
+	       NVL(B.PRODUCT_SEQ, '') AS PRODUCT_SEQ,
+	       NVL(C.PRODUCT_NAME, '') AS PRODUCT_NAME,
+	       A.USER_ID,
+	       NVL(A.POINT_POS, 0) AS POINT_POS,
+       	   NVL(A.POINT_VAR, 0) AS POINT_VAR,
+	       A.POINT_STATUS,
+	       B.PAY_PRICE,
+	       NVL(TO_CHAR(A.POINT_DATE, 'YYYY.MM.DD HH24:MI:SS'), '') AS POINT_DATE,
+	       B.PAY_STATUS,
+	       B.PAY_METHOD
+	  FROM TBL_POINT A, TBL_PAY B LEFT JOIN TBL_PRODUCT C
+	    ON B.PRODUCT_SEQ = C.PRODUCT_SEQ
+	 WHERE A.PAY_SEQ = B.PAY_SEQ
+	   AND A.POINT_SEQ = #{value};
+</select>
+
+</mapper>

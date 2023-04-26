@@ -1,0 +1,149 @@
+/* 2. 수평 네비게이션 바 */
+.nav_section {
+    display: flex;
+    justify-content: center;
+    background-color: #070720;
+    height: 84px;
+}
+
+.navi {
+    width: 1170px;
+    height: 80px;
+    max-width: 1170px;
+    position: relative;
+}
+
+.navi_logo_img {
+	width: 100%;
+	height: 84px;
+	padding: 17px;
+}
+
+.navi_logo_a {
+	width: 244px;
+	height: 84px;
+	padding: 0;
+}
+
+ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* navi 하위의 li만 선택 */
+.navi > li {
+    float:left;
+    height: 80px;
+    z-index: 50;
+    position: inherit;
+}
+
+/* 메인메뉴의 a태그만 선택(상하, 좌우 거리) */
+.navi > li > .navi_li_a{
+    padding: 30px;
+}
+
+/* 모든 a태그 */
+.navi_li_a{
+    background-color: #070720;
+    text-decoration: none;
+    font-weight: bold;
+    color: #fff;
+    display: block;
+    text-align: center;
+    padding: 10px;
+}
+
+.navi_li_a:hover {
+    background-color: #e53637;
+}
+
+/* 마우스 오버하지 않았을 때 서브메뉴가 보이지 않도록 설정 */
+/* 1. display 변경해서 설정 */
+/* li 하위의 ul = 서브메뉴 */
+.navi li ul {
+    display: none;
+}
+
+/* 마우스 커서를 올리면 서브 메뉴를 보이게 하기 */
+/* 마우스 오버했을 때 ul이 block되어 보여야 한다. */
+.navi li:hover ul{
+    display:block;
+}
+
+/* 2. 투명도를 변경해서 설정 */
+.navi li ul {
+    opacity:0;
+}
+
+.navi li:hover ul{
+    opacity:1;
+    transition: all 1s;
+}
+
+/* 모든 a태그를 대상으로 트랜지션 설정하기 */
+.navi li a{
+    transition: all 0.3s;
+}
+
+.productSearch_div {
+    display: flex;
+    position: relative;
+    margin-left: 20px;  
+}
+
+.productSearch_input {
+    height: 40px;
+    margin: 0;
+    padding: 10px;
+    border: 0;
+    position: absolute;
+    top: 20px;
+    border-radius: 10px;
+}
+
+.productSearch_input:focus {
+    outline: none;
+}
+
+.searchIcon {
+    background-color: #ffffff00;
+    z-index: 1;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    position: absolute;
+    top: 20px;
+    left: 177px;
+}
+
+.searchIcon img {
+    width: 20px;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+}
+
+.navi_loginOut {
+    position: absolute;
+    right: 0;
+}
+
+#login_icon_profile {
+    position: absolute;
+    right: -200px;
+    padding: 34px;
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+}
+
+.adminMenu {
+	position: absolute;
+    right: -345px;
+    padding: 30px;
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+}

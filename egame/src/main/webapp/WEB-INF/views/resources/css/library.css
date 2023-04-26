@@ -1,0 +1,62 @@
+/*---------------------
+  library
+-----------------------*/
+
+.library_table {
+	width: 100%;
+	border-top: 1px solid #ffffff;
+}
+
+.library_table th {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	color: #ffffff;
+	font-size: 22px;
+	font-weight: 700;
+	text-align: center;
+	border-bottom: 1px solid #ffffff;
+}
+
+.library_table_td1 {
+	padding-left: 5px;
+	color: #ffffff;
+	font-size: 20px;
+	font-weight: 700;
+	border-bottom: 1px solid #ffffff;
+}
+
+.library_table_td1 a {
+	color: #ffffff;
+}
+
+.library_table_td1 img {
+	margin: 5px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.library_table_td2 {
+	color: #ffffff;
+	font-size: 17px;
+	font-weight: 700;
+	text-align: center;
+	border-bottom: 1px solid #ffffff;
+}
+
+.library_page {
+	text-align: center;
+	padding-top: 20px;
+}
+
+.library_page a {
+	color: #ffffff;
+	font-size: 18px;
+	margin: 10px;
+}
+
+.pagination_curPage {
+	background-color: #e53637;
+	color: #ffffff;	  	
+	padding: 8px 16px;
+	text-decoration: none;
+}

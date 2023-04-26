@@ -1,0 +1,415 @@
+[2023-04-14 10:21:21.872] [main] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization started
+[2023-04-14 10:21:22.144] [main] DEBUG o.s.w.c.s.XmlWebApplicationContext - Refreshing Root WebApplicationContext
+[2023-04-14 10:21:22.832] [main] DEBUG o.s.c.a.ClassPathBeanDefinitionScanner - Identified candidate component class: file [C:\project\finalproject\egame\src\main\webapp\WEB-INF\classes\com\game\web\service\AdminService.class]
+[2023-04-14 10:21:22.834] [main] DEBUG o.s.c.a.ClassPathBeanDefinitionScanner - Identified candidate component class: file [C:\project\finalproject\egame\src\main\webapp\WEB-INF\classes\com\game\web\service\BoardService.class]
+[2023-04-14 10:21:22.840] [main] DEBUG o.s.c.a.ClassPathBeanDefinitionScanner - Identified candidate component class: file [C:\project\finalproject\egame\src\main\webapp\WEB-INF\classes\com\game\web\service\EGameService.class]
+[2023-04-14 10:21:22.847] [main] DEBUG o.s.c.a.ClassPathBeanDefinitionScanner - Identified candidate component class: file [C:\project\finalproject\egame\src\main\webapp\WEB-INF\classes\com\game\web\service\KakaoPayService.class]
+[2023-04-14 10:21:22.850] [main] DEBUG o.s.c.a.ClassPathBeanDefinitionScanner - Identified candidate component class: file [C:\project\finalproject\egame\src\main\webapp\WEB-INF\classes\com\game\web\service\MailSendService.class]
+[2023-04-14 10:21:22.865] [main] DEBUG o.s.c.a.ClassPathBeanDefinitionScanner - Identified candidate component class: file [C:\project\finalproject\egame\src\main\webapp\WEB-INF\classes\com\game\web\service\PayService.class]
+[2023-04-14 10:21:22.870] [main] DEBUG o.s.c.a.ClassPathBeanDefinitionScanner - Identified candidate component class: file [C:\project\finalproject\egame\src\main\webapp\WEB-INF\classes\com\game\web\service\SellerService.class]
+[2023-04-14 10:21:22.874] [main] DEBUG o.s.c.a.ClassPathBeanDefinitionScanner - Identified candidate component class: file [C:\project\finalproject\egame\src\main\webapp\WEB-INF\classes\com\game\web\service\UserService.class]
+[2023-04-14 10:21:22.958] [main] DEBUG o.s.b.f.xml.XmlBeanDefinitionReader - Loaded 26 bean definitions from ServletContext resource [/WEB-INF/config/spring/root-context.xml]
+[2023-04-14 10:21:23.129] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.context.annotation.internalConfigurationAnnotationProcessor'
+[2023-04-14 10:21:23.319] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.mybatis.spring.mapper.MapperScannerConfigurer#0'
+[2023-04-14 10:21:23.451] [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+[2023-04-14 10:21:23.480] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.context.event.internalEventListenerProcessor'
+[2023-04-14 10:21:23.487] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.transaction.config.internalTransactionalEventListenerFactory'
+[2023-04-14 10:21:23.490] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.context.event.internalEventListenerFactory'
+[2023-04-14 10:21:23.496] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.context.annotation.internalAutowiredAnnotationProcessor'
+[2023-04-14 10:21:23.506] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.context.annotation.internalCommonAnnotationProcessor'
+[2023-04-14 10:21:23.520] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.aop.config.internalAutoProxyCreator'
+[2023-04-14 10:21:23.683] [main] DEBUG o.s.u.c.s.UiApplicationContextUtils - Unable to locate ThemeSource with name 'themeSource': using default [org.springframework.ui.context.support.ResourceBundleThemeSource@1b89debc]
+[2023-04-14 10:21:23.686] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'env'
+[2023-04-14 10:21:23.727] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.transaction.config.internalTransactionAdvisor'
+[2023-04-14 10:21:23.731] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.transaction.annotation.AnnotationTransactionAttributeSource#0'
+[2023-04-14 10:21:23.798] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'hikariConfig'
+[2023-04-14 10:21:24.085] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'dataSource'
+[2023-04-14 10:21:25.188] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'sqlSessionFactory'
+[2023-04-14 10:21:26.059] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'sqlSessionTemplate'
+[2023-04-14 10:21:26.094] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'transactionManager'
+[2023-04-14 10:21:26.141] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.transaction.interceptor.TransactionInterceptor#0'
+[2023-04-14 10:21:26.181] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'adminService'
+[2023-04-14 10:21:26.213] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'adminDao'
+[2023-04-14 10:21:26.243] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'eGameDao'
+[2023-04-14 10:21:26.518] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'boardServidce'
+[2023-04-14 10:21:26.522] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'boardDao'
+[2023-04-14 10:21:26.543] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'eGameServidce'
+[2023-04-14 10:21:26.548] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'userDao'
+[2023-04-14 10:21:26.572] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'kakaoPayService'
+[2023-04-14 10:21:26.586] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'mailSendService'
+[2023-04-14 10:21:26.590] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'mailSender'
+[2023-04-14 10:21:26.647] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'payService'
+[2023-04-14 10:21:26.650] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'payDao'
+[2023-04-14 10:21:26.657] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'sellerService'
+[2023-04-14 10:21:26.659] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'sellerDao'
+[2023-04-14 10:21:26.661] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'userService'
+[2023-04-14 10:21:26.749] [main] DEBUG o.springframework.jndi.JndiTemplate - Looking up JNDI object with name [java:comp/env/spring.liveBeansView.mbeanDomain]
+[2023-04-14 10:21:26.754] [main] DEBUG o.s.jndi.JndiLocatorDelegate - Converted JNDI name [java:comp/env/spring.liveBeansView.mbeanDomain] not found - trying original name [spring.liveBeansView.mbeanDomain]. javax.naming.NameNotFoundException: Name [spring.liveBeansView.mbeanDomain]은(는) 이 컨텍스트에 바인딩되지 않았습니다. [spring.liveBeansView.mbeanDomain]을(를) 찾을 수 없습니다.
+[2023-04-14 10:21:26.757] [main] DEBUG o.springframework.jndi.JndiTemplate - Looking up JNDI object with name [spring.liveBeansView.mbeanDomain]
+[2023-04-14 10:21:26.763] [main] DEBUG o.s.jndi.JndiPropertySource - JNDI lookup for name [spring.liveBeansView.mbeanDomain] threw NamingException with message: Name [spring.liveBeansView.mbeanDomain]은(는) 이 컨텍스트에 바인딩되지 않았습니다. [spring.liveBeansView.mbeanDomain]을(를) 찾을 수 없습니다.. Returning null.
+[2023-04-14 10:21:26.782] [main] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext initialized in 4876 ms
+[2023-04-14 10:21:27.068] [main] DEBUG o.s.w.filter.CharacterEncodingFilter - Filter 'encodingFilter' configured for use
+[2023-04-14 10:21:27.132] [main] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+[2023-04-14 10:21:27.135] [main] DEBUG o.springframework.jndi.JndiTemplate - Looking up JNDI object with name [java:comp/env/spring.profiles.active]
+[2023-04-14 10:21:27.137] [main] DEBUG o.s.jndi.JndiLocatorDelegate - Converted JNDI name [java:comp/env/spring.profiles.active] not found - trying original name [spring.profiles.active]. javax.naming.NameNotFoundException: Name [spring.profiles.active]은(는) 이 컨텍스트에 바인딩되지 않았습니다. [spring.profiles.active]을(를) 찾을 수 없습니다.
+[2023-04-14 10:21:27.138] [main] DEBUG o.springframework.jndi.JndiTemplate - Looking up JNDI object with name [spring.profiles.active]
+[2023-04-14 10:21:27.139] [main] DEBUG o.s.jndi.JndiPropertySource - JNDI lookup for name [spring.profiles.active] threw NamingException with message: Name [spring.profiles.active]은(는) 이 컨텍스트에 바인딩되지 않았습니다. [spring.profiles.active]을(를) 찾을 수 없습니다.. Returning null.
+[2023-04-14 10:21:27.139] [main] DEBUG o.springframework.jndi.JndiTemplate - Looking up JNDI object with name [java:comp/env/spring.profiles.default]
+[2023-04-14 10:21:27.142] [main] DEBUG o.s.jndi.JndiLocatorDelegate - Converted JNDI name [java:comp/env/spring.profiles.default] not found - trying original name [spring.profiles.default]. javax.naming.NameNotFoundException: Name [spring.profiles.default]은(는) 이 컨텍스트에 바인딩되지 않았습니다. [spring.profiles.default]을(를) 찾을 수 없습니다.
+[2023-04-14 10:21:27.142] [main] DEBUG o.springframework.jndi.JndiTemplate - Looking up JNDI object with name [spring.profiles.default]
+[2023-04-14 10:21:27.143] [main] DEBUG o.s.jndi.JndiPropertySource - JNDI lookup for name [spring.profiles.default] threw NamingException with message: Name [spring.profiles.default]은(는) 이 컨텍스트에 바인딩되지 않았습니다. [spring.profiles.default]을(를) 찾을 수 없습니다.. Returning null.
+[2023-04-14 10:21:27.147] [main] DEBUG o.s.w.c.s.XmlWebApplicationContext - Refreshing WebApplicationContext for namespace 'dispatcherServlet-servlet'
+[2023-04-14 10:21:27.284] [main] DEBUG o.s.c.a.ClassPathBeanDefinitionScanner - Identified candidate component class: file [C:\project\finalproject\egame\src\main\webapp\WEB-INF\classes\com\game\web\controller\AdminController.class]
+[2023-04-14 10:21:27.292] [main] DEBUG o.s.c.a.ClassPathBeanDefinitionScanner - Identified candidate component class: file [C:\project\finalproject\egame\src\main\webapp\WEB-INF\classes\com\game\web\controller\BoardController.class]
+[2023-04-14 10:21:27.309] [main] DEBUG o.s.c.a.ClassPathBeanDefinitionScanner - Identified candidate component class: file [C:\project\finalproject\egame\src\main\webapp\WEB-INF\classes\com\game\web\controller\EGameController.class]
+[2023-04-14 10:21:27.315] [main] DEBUG o.s.c.a.ClassPathBeanDefinitionScanner - Identified candidate component class: file [C:\project\finalproject\egame\src\main\webapp\WEB-INF\classes\com\game\web\controller\IndexController.class]
+[2023-04-14 10:21:27.320] [main] DEBUG o.s.c.a.ClassPathBeanDefinitionScanner - Identified candidate component class: file [C:\project\finalproject\egame\src\main\webapp\WEB-INF\classes\com\game\web\controller\KakaoPayController.class]
+[2023-04-14 10:21:27.330] [main] DEBUG o.s.c.a.ClassPathBeanDefinitionScanner - Identified candidate component class: file [C:\project\finalproject\egame\src\main\webapp\WEB-INF\classes\com\game\web\controller\PayController.class]
+[2023-04-14 10:21:27.347] [main] DEBUG o.s.c.a.ClassPathBeanDefinitionScanner - Identified candidate component class: file [C:\project\finalproject\egame\src\main\webapp\WEB-INF\classes\com\game\web\controller\SellerController.class]
+[2023-04-14 10:21:27.359] [main] DEBUG o.s.c.a.ClassPathBeanDefinitionScanner - Identified candidate component class: file [C:\project\finalproject\egame\src\main\webapp\WEB-INF\classes\com\game\web\controller\UserController.class]
+[2023-04-14 10:21:27.568] [main] DEBUG o.s.b.f.xml.XmlBeanDefinitionReader - Loaded 39 bean definitions from ServletContext resource [/WEB-INF/config/spring/servlet-context.xml]
+[2023-04-14 10:21:27.626] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.context.annotation.internalConfigurationAnnotationProcessor'
+[2023-04-14 10:21:27.763] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.context.event.internalEventListenerProcessor'
+[2023-04-14 10:21:27.764] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.context.event.internalEventListenerFactory'
+[2023-04-14 10:21:27.770] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.context.annotation.internalAutowiredAnnotationProcessor'
+[2023-04-14 10:21:27.776] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.context.annotation.internalCommonAnnotationProcessor'
+[2023-04-14 10:21:27.779] [main] DEBUG o.s.u.c.s.UiApplicationContextUtils - Unable to locate ThemeSource with name 'themeSource': using default [org.springframework.ui.context.support.DelegatingThemeSource@4290fcd7]
+[2023-04-14 10:21:27.781] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'adminController'
+[2023-04-14 10:21:27.795] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'boardController'
+[2023-04-14 10:21:27.801] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'egameController'
+[2023-04-14 10:21:27.812] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'indexController'
+[2023-04-14 10:21:27.820] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'kakaoPayController'
+[2023-04-14 10:21:27.825] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'payController'
+[2023-04-14 10:21:27.830] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'sellerController'
+[2023-04-14 10:21:27.833] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'userController'
+[2023-04-14 10:21:27.841] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'mvcContentNegotiationManager'
+[2023-04-14 10:21:27.883] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping'
+[2023-04-14 10:21:28.000] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'mvcCorsConfigurations'
+[2023-04-14 10:21:28.001] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.web.servlet.handler.MappedInterceptor#0'
+[2023-04-14 10:21:28.006] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.format.support.FormattingConversionServiceFactoryBean#0'
+[2023-04-14 10:21:28.146] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.web.servlet.handler.MappedInterceptor#1'
+[2023-04-14 10:21:28.152] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.web.servlet.handler.MappedInterceptor#2'
+[2023-04-14 10:21:28.176] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.web.servlet.handler.MappedInterceptor#3'
+[2023-04-14 10:21:28.187] [main] DEBUG c.g.web.interceptor.AuthInterceptor - ############################################################################
+[2023-04-14 10:21:28.189] [main] DEBUG c.g.web.interceptor.AuthInterceptor - # AuthInterceptor                                                          #
+[2023-04-14 10:21:28.191] [main] DEBUG c.g.web.interceptor.AuthInterceptor - ############################################################################
+[2023-04-14 10:21:28.193] [main] DEBUG c.g.web.interceptor.AuthInterceptor - //////////////////////////////////////////////////
+[2023-04-14 10:21:28.195] [main] DEBUG c.g.web.interceptor.AuthInterceptor - // Auth Cookie Name                             //
+[2023-04-14 10:21:28.197] [main] DEBUG c.g.web.interceptor.AuthInterceptor - //////////////////////////////////////////////////
+[2023-04-14 10:21:28.202] [main] DEBUG c.g.web.interceptor.AuthInterceptor - // USER_ID
+[2023-04-14 10:21:28.203] [main] DEBUG c.g.web.interceptor.AuthInterceptor - //////////////////////////////////////////////////
+[2023-04-14 10:21:28.203] [main] DEBUG c.g.web.interceptor.AuthInterceptor - //////////////////////////////////////////////////
+[2023-04-14 10:21:28.203] [main] DEBUG c.g.web.interceptor.AuthInterceptor - // Ajax Header Name                             //
+[2023-04-14 10:21:28.203] [main] DEBUG c.g.web.interceptor.AuthInterceptor - //////////////////////////////////////////////////
+[2023-04-14 10:21:28.204] [main] DEBUG c.g.web.interceptor.AuthInterceptor - // AJAX
+[2023-04-14 10:21:28.204] [main] DEBUG c.g.web.interceptor.AuthInterceptor - //////////////////////////////////////////////////
+[2023-04-14 10:21:28.204] [main] DEBUG c.g.web.interceptor.AuthInterceptor - //////////////////////////////////////////////////
+[2023-04-14 10:21:28.204] [main] DEBUG c.g.web.interceptor.AuthInterceptor - // Auth Exclude Url                             //
+[2023-04-14 10:21:28.204] [main] DEBUG c.g.web.interceptor.AuthInterceptor - //////////////////////////////////////////////////
+[2023-04-14 10:21:28.210] [main] DEBUG c.g.web.interceptor.AuthInterceptor - // /index
+[2023-04-14 10:21:28.211] [main] DEBUG c.g.web.interceptor.AuthInterceptor - // /first
+[2023-04-14 10:21:28.211] [main] DEBUG c.g.web.interceptor.AuthInterceptor - // /store
+[2023-04-14 10:21:28.211] [main] DEBUG c.g.web.interceptor.AuthInterceptor - // /storeDetail
+[2023-04-14 10:21:28.212] [main] DEBUG c.g.web.interceptor.AuthInterceptor - // /user/signUp
+[2023-04-14 10:21:28.214] [main] DEBUG c.g.web.interceptor.AuthInterceptor - // /user/login
+[2023-04-14 10:21:28.216] [main] DEBUG c.g.web.interceptor.AuthInterceptor - // /user/loginProc
+[2023-04-14 10:21:28.218] [main] DEBUG c.g.web.interceptor.AuthInterceptor - // /user/loginOut
+[2023-04-14 10:21:28.218] [main] DEBUG c.g.web.interceptor.AuthInterceptor - // /user/regForm
+[2023-04-14 10:21:28.220] [main] DEBUG c.g.web.interceptor.AuthInterceptor - // /user/regProc
+[2023-04-14 10:21:28.221] [main] DEBUG c.g.web.interceptor.AuthInterceptor - // /user/idCheck
+[2023-04-14 10:21:28.221] [main] DEBUG c.g.web.interceptor.AuthInterceptor - // /test/index
+[2023-04-14 10:21:28.221] [main] DEBUG c.g.web.interceptor.AuthInterceptor - // /test/productInsert
+[2023-04-14 10:21:28.221] [main] DEBUG c.g.web.interceptor.AuthInterceptor - // /test/product
+[2023-04-14 10:21:28.221] [main] DEBUG c.g.web.interceptor.AuthInterceptor - // /board/qna
+[2023-04-14 10:21:28.221] [main] DEBUG c.g.web.interceptor.AuthInterceptor - // /board/qnaDetail
+[2023-04-14 10:21:28.221] [main] DEBUG c.g.web.interceptor.AuthInterceptor - // /board/notice
+[2023-04-14 10:21:28.222] [main] DEBUG c.g.web.interceptor.AuthInterceptor - // /board/noticeDetail
+[2023-04-14 10:21:28.223] [main] DEBUG c.g.web.interceptor.AuthInterceptor - // /review/reviewForm
+[2023-04-14 10:21:28.223] [main] DEBUG c.g.web.interceptor.AuthInterceptor - // /review/userCheck
+[2023-04-14 10:21:28.223] [main] DEBUG c.g.web.interceptor.AuthInterceptor - // /kakao/pay
+[2023-04-14 10:21:28.224] [main] DEBUG c.g.web.interceptor.AuthInterceptor - // /kakao/payReady
+[2023-04-14 10:21:28.224] [main] DEBUG c.g.web.interceptor.AuthInterceptor - // /kakao/paySuccess
+[2023-04-14 10:21:28.225] [main] DEBUG c.g.web.interceptor.AuthInterceptor - // /kakao/payFail
+[2023-04-14 10:21:28.225] [main] DEBUG c.g.web.interceptor.AuthInterceptor - // /kakao/payCancel
+[2023-04-14 10:21:28.225] [main] DEBUG c.g.web.interceptor.AuthInterceptor - // /product/cookieDelete
+[2023-04-14 10:21:28.225] [main] DEBUG c.g.web.interceptor.AuthInterceptor - // /user/businessNumCheck
+[2023-04-14 10:21:28.225] [main] DEBUG c.g.web.interceptor.AuthInterceptor - // /user/emailCheck
+[2023-04-14 10:21:28.225] [main] DEBUG c.g.web.interceptor.AuthInterceptor - // /store/loginCheck
+[2023-04-14 10:21:28.225] [main] DEBUG c.g.web.interceptor.AuthInterceptor - // /user/friendPage
+[2023-04-14 10:21:28.225] [main] DEBUG c.g.web.interceptor.AuthInterceptor - // /user/addFriend
+[2023-04-14 10:21:28.233] [main] DEBUG c.g.web.interceptor.AuthInterceptor - //////////////////////////////////////////////////
+[2023-04-14 10:21:28.236] [main] DEBUG c.g.web.interceptor.AuthInterceptor - ############################################################################
+[2023-04-14 10:21:28.349] [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - 83 mappings in 'org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping'
+[2023-04-14 10:21:28.351] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter'
+[2023-04-14 10:21:29.341] [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+[2023-04-14 10:21:29.462] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'mvcUriComponentsContributor'
+[2023-04-14 10:21:29.498] [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+[2023-04-14 10:21:29.508] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver#0'
+[2023-04-14 10:21:29.580] [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+[2023-04-14 10:21:29.582] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.web.servlet.mvc.annotation.ResponseStatusExceptionResolver#0'
+[2023-04-14 10:21:29.598] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver#0'
+[2023-04-14 10:21:29.607] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping'
+[2023-04-14 10:21:29.625] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter'
+[2023-04-14 10:21:29.629] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter'
+[2023-04-14 10:21:29.630] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'mvcResourceUrlProvider'
+[2023-04-14 10:21:29.631] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'mvcPathMatcher'
+[2023-04-14 10:21:29.635] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'mvcUrlPathHelper'
+[2023-04-14 10:21:29.637] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+[2023-04-14 10:21:29.698] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.web.servlet.handler.SimpleUrlHandlerMapping#0'
+[2023-04-14 10:21:29.712] [main] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/resources/**] in 'org.springframework.web.servlet.handler.SimpleUrlHandlerMapping#0'
+[2023-04-14 10:21:29.714] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.web.servlet.view.BeanNameViewResolver#0'
+[2023-04-14 10:21:29.729] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'internalResourceViewResolver'
+[2023-04-14 10:21:29.791] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'fileDownloadView'
+[2023-04-14 10:21:29.798] [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'multipartResolver'
+[2023-04-14 10:21:29.983] [main] DEBUG o.s.web.servlet.DispatcherServlet - Detected CommonsMultipartResolver
+[2023-04-14 10:21:30.004] [main] DEBUG o.springframework.jndi.JndiTemplate - Looking up JNDI object with name [java:comp/env/spring.liveBeansView.mbeanDomain]
+[2023-04-14 10:21:30.006] [main] DEBUG o.s.jndi.JndiLocatorDelegate - Converted JNDI name [java:comp/env/spring.liveBeansView.mbeanDomain] not found - trying original name [spring.liveBeansView.mbeanDomain]. javax.naming.NameNotFoundException: Name [spring.liveBeansView.mbeanDomain]은(는) 이 컨텍스트에 바인딩되지 않았습니다. [spring.liveBeansView.mbeanDomain]을(를) 찾을 수 없습니다.
+[2023-04-14 10:21:30.009] [main] DEBUG o.springframework.jndi.JndiTemplate - Looking up JNDI object with name [spring.liveBeansView.mbeanDomain]
+[2023-04-14 10:21:30.011] [main] DEBUG o.s.jndi.JndiPropertySource - JNDI lookup for name [spring.liveBeansView.mbeanDomain] threw NamingException with message: Name [spring.liveBeansView.mbeanDomain]은(는) 이 컨텍스트에 바인딩되지 않았습니다. [spring.liveBeansView.mbeanDomain]을(를) 찾을 수 없습니다.. Returning null.
+[2023-04-14 10:21:30.014] [main] DEBUG o.s.web.servlet.DispatcherServlet - enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+[2023-04-14 10:21:30.015] [main] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2880 ms
+[2023-04-14 10:21:44.035] [http-nio-8088-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - "FORWARD" dispatch for GET "/index", parameters={}
+[2023-04-14 10:21:44.047] [http-nio-8088-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.game.web.controller.IndexController#index(Model, HttpServletRequest, HttpServletResponse)
+[2023-04-14 10:21:44.063] [http-nio-8088-exec-1] DEBUG c.g.web.interceptor.AuthInterceptor - ############################################################################
+[2023-04-14 10:21:44.064] [http-nio-8088-exec-1] DEBUG c.g.web.interceptor.AuthInterceptor - # Logging start [/index]
+[2023-04-14 10:21:44.065] [http-nio-8088-exec-1] DEBUG c.g.web.interceptor.AuthInterceptor - ############################################################################
+[2023-04-14 10:21:44.076] [http-nio-8088-exec-1] DEBUG c.g.web.interceptor.AuthInterceptor - 
+////////////////////////////////////////////////////////////////////////////////
+[Remote IP] : [127.0.0.1]
+[Locale]    : [ko]
+[URL]       : [http://store.egame.com:8088/index]
+[URI]       : [/index]
+[Method]    : [GET]
+[Protocol]  : [HTTP/1.1]
+[Referer]   : []
+////////////////////////////////////////////////////////////////////////////////
+// Headers                                                                      
+////////////////////////////////////////////////////////////////////////////////
+[host] : [store.egame.com:8088]
+[connection] : [keep-alive]
+[upgrade-insecure-requests] : [1]
+[user-agent] : [Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 Edg/112.0.1722.39]
+[accept] : [text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7]
+[accept-encoding] : [gzip, deflate]
+[accept-language] : [ko]
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+// Get Parameters                                                               
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+
+[2023-04-14 10:21:44.076] [http-nio-8088-exec-1] DEBUG c.g.web.interceptor.AuthInterceptor - ############################################################################
+[2023-04-14 10:21:44.076] [http-nio-8088-exec-1] DEBUG c.g.web.interceptor.AuthInterceptor - ############################################################################
+[2023-04-14 10:21:44.336] [http-nio-8088-exec-1] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+[2023-04-14 10:21:44.366] [http-nio-8088-exec-1] DEBUG c.game.web.dao.EGameDao.productList - ==>  Preparing: SELECT * FROM( SELECT ROWNUM AS RNUM, PRODUCT_SEQ, USER_SELLER_ID, DISCNT_SEQ, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_CONTENT, PRODUCT_BUY_CNT, PAY_PRICE, REVIEW_CNT, PRODUCT_GRADE, PRODUCT_STATUS FROM( SELECT PRODUCT_SEQ, NVL(USER_SELLER_ID,'') AS USER_SELLER_ID, NVL(DISCNT_SEQ,0) AS DISCNT_SEQ, NVL(PRODUCT_NAME,'') AS PRODUCT_NAME, NVL(PRODUCT_PRICE,0) AS PRODUCT_PRICE, NVL(PRODUCT_CONTENT,'') AS PRODUCT_CONTENT, NVL(PRODUCT_BUY_CNT,0) AS PRODUCT_BUY_CNT, NVL(PAY_PRICE,0) AS PAY_PRICE, NVL(REVIEW_CNT,0) AS REVIEW_CNT, NVL(PRODUCT_GRADE,0)AS PRODUCT_GRADE, NVL(PRODUCT_STATUS,'N')AS PRODUCT_STATUS FROM TBL_PRODUCT WHERE PRODUCT_SEQ IN ( SELECT DISTINCT A.PRODUCT_SEQ FROM TBL_PRODUCT A, TBL_PRODUCT_TAG B WHERE A.PRODUCT_SEQ=B.PRODUCT_SEQ AND A.PRODUCT_STATUS = 'Y' ) ORDER BY DBMS_RANDOM.RANDOM() )) WHERE RNUM >= ? AND RNUM <= ?
+[2023-04-14 10:21:44.551] [http-nio-8088-exec-1] DEBUG c.game.web.dao.EGameDao.productList - ==> Parameters: 1(Long), 3(Long)
+[2023-04-14 10:21:44.698] [http-nio-8088-exec-1] DEBUG c.game.web.dao.EGameDao.productList - <==      Total: 3
+[2023-04-14 10:21:44.708] [http-nio-8088-exec-1] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+[2023-04-14 10:21:44.708] [http-nio-8088-exec-1] DEBUG c.g.w.d.E.productTagNameSelect - ==>  Preparing: SELECT TAG_NAME FROM TBL_PRODUCT_TAG A, TBL_TAG B WHERE A.TAG_NUM = B.TAG_NUM AND A.PRODUCT_SEQ = ?
+[2023-04-14 10:21:44.708] [http-nio-8088-exec-1] DEBUG c.g.w.d.E.productTagNameSelect - ==> Parameters: 76(Long)
+[2023-04-14 10:21:44.723] [http-nio-8088-exec-1] DEBUG c.g.w.d.E.productTagNameSelect - <==      Total: 5
+[2023-04-14 10:21:44.724] [http-nio-8088-exec-1] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+[2023-04-14 10:21:44.724] [http-nio-8088-exec-1] DEBUG c.game.web.dao.EGameDao.discntSelect - ==>  Preparing: SELECT DISCNT_SEQ, PRODUCT_SEQ, DISCNT_RATE, DISCNT_START_DATE, DISCNT_END_DATE, DISCNT_STATUS FROM TBL_DISCNT WHERE DISCNT_SEQ = ? AND DISCNT_END_DATE >= TO_CHAR(SYSDATE,'YYYYMMDD') AND DISCNT_STATUS = 'Y'
+[2023-04-14 10:21:44.726] [http-nio-8088-exec-1] DEBUG c.game.web.dao.EGameDao.discntSelect - ==> Parameters: 90(Long)
+[2023-04-14 10:21:44.748] [http-nio-8088-exec-1] DEBUG c.game.web.dao.EGameDao.discntSelect - <==      Total: 1
+[2023-04-14 10:21:44.749] [http-nio-8088-exec-1] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+[2023-04-14 10:21:44.749] [http-nio-8088-exec-1] DEBUG c.g.w.d.E.productTagNameSelect - ==>  Preparing: SELECT TAG_NAME FROM TBL_PRODUCT_TAG A, TBL_TAG B WHERE A.TAG_NUM = B.TAG_NUM AND A.PRODUCT_SEQ = ?
+[2023-04-14 10:21:44.750] [http-nio-8088-exec-1] DEBUG c.g.w.d.E.productTagNameSelect - ==> Parameters: 38(Long)
+[2023-04-14 10:21:44.754] [http-nio-8088-exec-1] DEBUG c.g.w.d.E.productTagNameSelect - <==      Total: 6
+[2023-04-14 10:21:44.755] [http-nio-8088-exec-1] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+[2023-04-14 10:21:44.755] [http-nio-8088-exec-1] DEBUG c.g.w.d.E.productTagNameSelect - ==>  Preparing: SELECT TAG_NAME FROM TBL_PRODUCT_TAG A, TBL_TAG B WHERE A.TAG_NUM = B.TAG_NUM AND A.PRODUCT_SEQ = ?
+[2023-04-14 10:21:44.755] [http-nio-8088-exec-1] DEBUG c.g.w.d.E.productTagNameSelect - ==> Parameters: 70(Long)
+[2023-04-14 10:21:44.757] [http-nio-8088-exec-1] DEBUG c.g.w.d.E.productTagNameSelect - <==      Total: 5
+[2023-04-14 10:21:44.760] [http-nio-8088-exec-1] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+[2023-04-14 10:21:44.760] [http-nio-8088-exec-1] DEBUG c.game.web.dao.EGameDao.productList - ==>  Preparing: SELECT * FROM( SELECT ROWNUM AS RNUM, PRODUCT_SEQ, USER_SELLER_ID, DISCNT_SEQ, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_CONTENT, PRODUCT_BUY_CNT, PAY_PRICE, REVIEW_CNT, PRODUCT_GRADE, PRODUCT_STATUS FROM( SELECT PRODUCT_SEQ, NVL(USER_SELLER_ID,'') AS USER_SELLER_ID, NVL(DISCNT_SEQ,0) AS DISCNT_SEQ, NVL(PRODUCT_NAME,'') AS PRODUCT_NAME, NVL(PRODUCT_PRICE,0) AS PRODUCT_PRICE, NVL(PRODUCT_CONTENT,'') AS PRODUCT_CONTENT, NVL(PRODUCT_BUY_CNT,0) AS PRODUCT_BUY_CNT, NVL(PAY_PRICE,0) AS PAY_PRICE, NVL(REVIEW_CNT,0) AS REVIEW_CNT, NVL(PRODUCT_GRADE,0)AS PRODUCT_GRADE, NVL(PRODUCT_STATUS,'N')AS PRODUCT_STATUS FROM TBL_PRODUCT WHERE PRODUCT_SEQ IN ( SELECT DISTINCT A.PRODUCT_SEQ FROM TBL_PRODUCT A, TBL_PRODUCT_TAG B WHERE A.PRODUCT_SEQ=B.PRODUCT_SEQ AND A.PRODUCT_STATUS = 'Y' AND A.DISCNT_SEQ >= 1 ) ORDER BY PRODUCT_SEQ DESC )) WHERE RNUM >= ? AND RNUM <= ?
+[2023-04-14 10:21:44.761] [http-nio-8088-exec-1] DEBUG c.game.web.dao.EGameDao.productList - ==> Parameters: 1(Long), 3(Long)
+[2023-04-14 10:21:44.798] [http-nio-8088-exec-1] DEBUG c.game.web.dao.EGameDao.productList - <==      Total: 3
+[2023-04-14 10:21:44.798] [http-nio-8088-exec-1] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+[2023-04-14 10:21:44.798] [http-nio-8088-exec-1] DEBUG c.g.w.d.E.productTagNameSelect - ==>  Preparing: SELECT TAG_NAME FROM TBL_PRODUCT_TAG A, TBL_TAG B WHERE A.TAG_NUM = B.TAG_NUM AND A.PRODUCT_SEQ = ?
+[2023-04-14 10:21:44.799] [http-nio-8088-exec-1] DEBUG c.g.w.d.E.productTagNameSelect - ==> Parameters: 102(Long)
+[2023-04-14 10:21:44.800] [http-nio-8088-exec-1] DEBUG c.g.w.d.E.productTagNameSelect - <==      Total: 6
+[2023-04-14 10:21:44.801] [http-nio-8088-exec-1] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+[2023-04-14 10:21:44.801] [http-nio-8088-exec-1] DEBUG c.game.web.dao.EGameDao.discntSelect - ==>  Preparing: SELECT DISCNT_SEQ, PRODUCT_SEQ, DISCNT_RATE, DISCNT_START_DATE, DISCNT_END_DATE, DISCNT_STATUS FROM TBL_DISCNT WHERE DISCNT_SEQ = ? AND DISCNT_END_DATE >= TO_CHAR(SYSDATE,'YYYYMMDD') AND DISCNT_STATUS = 'Y'
+[2023-04-14 10:21:44.802] [http-nio-8088-exec-1] DEBUG c.game.web.dao.EGameDao.discntSelect - ==> Parameters: 103(Long)
+[2023-04-14 10:21:44.806] [http-nio-8088-exec-1] DEBUG c.game.web.dao.EGameDao.discntSelect - <==      Total: 1
+[2023-04-14 10:21:44.806] [http-nio-8088-exec-1] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+[2023-04-14 10:21:44.806] [http-nio-8088-exec-1] DEBUG c.g.w.d.E.productTagNameSelect - ==>  Preparing: SELECT TAG_NAME FROM TBL_PRODUCT_TAG A, TBL_TAG B WHERE A.TAG_NUM = B.TAG_NUM AND A.PRODUCT_SEQ = ?
+[2023-04-14 10:21:44.807] [http-nio-8088-exec-1] DEBUG c.g.w.d.E.productTagNameSelect - ==> Parameters: 76(Long)
+[2023-04-14 10:21:44.810] [http-nio-8088-exec-1] DEBUG c.g.w.d.E.productTagNameSelect - <==      Total: 5
+[2023-04-14 10:21:44.811] [http-nio-8088-exec-1] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+[2023-04-14 10:21:44.811] [http-nio-8088-exec-1] DEBUG c.game.web.dao.EGameDao.discntSelect - ==>  Preparing: SELECT DISCNT_SEQ, PRODUCT_SEQ, DISCNT_RATE, DISCNT_START_DATE, DISCNT_END_DATE, DISCNT_STATUS FROM TBL_DISCNT WHERE DISCNT_SEQ = ? AND DISCNT_END_DATE >= TO_CHAR(SYSDATE,'YYYYMMDD') AND DISCNT_STATUS = 'Y'
+[2023-04-14 10:21:44.811] [http-nio-8088-exec-1] DEBUG c.game.web.dao.EGameDao.discntSelect - ==> Parameters: 90(Long)
+[2023-04-14 10:21:44.816] [http-nio-8088-exec-1] DEBUG c.game.web.dao.EGameDao.discntSelect - <==      Total: 1
+[2023-04-14 10:21:44.816] [http-nio-8088-exec-1] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+[2023-04-14 10:21:44.816] [http-nio-8088-exec-1] DEBUG c.g.w.d.E.productTagNameSelect - ==>  Preparing: SELECT TAG_NAME FROM TBL_PRODUCT_TAG A, TBL_TAG B WHERE A.TAG_NUM = B.TAG_NUM AND A.PRODUCT_SEQ = ?
+[2023-04-14 10:21:44.816] [http-nio-8088-exec-1] DEBUG c.g.w.d.E.productTagNameSelect - ==> Parameters: 56(Long)
+[2023-04-14 10:21:44.819] [http-nio-8088-exec-1] DEBUG c.g.w.d.E.productTagNameSelect - <==      Total: 4
+[2023-04-14 10:21:44.819] [http-nio-8088-exec-1] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+[2023-04-14 10:21:44.820] [http-nio-8088-exec-1] DEBUG c.game.web.dao.EGameDao.discntSelect - ==>  Preparing: SELECT DISCNT_SEQ, PRODUCT_SEQ, DISCNT_RATE, DISCNT_START_DATE, DISCNT_END_DATE, DISCNT_STATUS FROM TBL_DISCNT WHERE DISCNT_SEQ = ? AND DISCNT_END_DATE >= TO_CHAR(SYSDATE,'YYYYMMDD') AND DISCNT_STATUS = 'Y'
+[2023-04-14 10:21:44.820] [http-nio-8088-exec-1] DEBUG c.game.web.dao.EGameDao.discntSelect - ==> Parameters: 91(Long)
+[2023-04-14 10:21:44.823] [http-nio-8088-exec-1] DEBUG c.game.web.dao.EGameDao.discntSelect - <==      Total: 1
+[2023-04-14 10:21:44.824] [http-nio-8088-exec-1] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+[2023-04-14 10:21:44.825] [http-nio-8088-exec-1] DEBUG c.game.web.dao.EGameDao.productList - ==>  Preparing: SELECT * FROM( SELECT ROWNUM AS RNUM, PRODUCT_SEQ, USER_SELLER_ID, DISCNT_SEQ, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_CONTENT, PRODUCT_BUY_CNT, PAY_PRICE, REVIEW_CNT, PRODUCT_GRADE, PRODUCT_STATUS FROM( SELECT PRODUCT_SEQ, NVL(USER_SELLER_ID,'') AS USER_SELLER_ID, NVL(DISCNT_SEQ,0) AS DISCNT_SEQ, NVL(PRODUCT_NAME,'') AS PRODUCT_NAME, NVL(PRODUCT_PRICE,0) AS PRODUCT_PRICE, NVL(PRODUCT_CONTENT,'') AS PRODUCT_CONTENT, NVL(PRODUCT_BUY_CNT,0) AS PRODUCT_BUY_CNT, NVL(PAY_PRICE,0) AS PAY_PRICE, NVL(REVIEW_CNT,0) AS REVIEW_CNT, NVL(PRODUCT_GRADE,0)AS PRODUCT_GRADE, NVL(PRODUCT_STATUS,'N')AS PRODUCT_STATUS FROM TBL_PRODUCT WHERE PRODUCT_SEQ IN ( SELECT DISTINCT A.PRODUCT_SEQ FROM TBL_PRODUCT A, TBL_PRODUCT_TAG B WHERE A.PRODUCT_SEQ=B.PRODUCT_SEQ AND A.PRODUCT_STATUS = 'Y' ) ORDER BY PRODUCT_BUY_CNT DESC )) WHERE RNUM >= ? AND RNUM <= ?
+[2023-04-14 10:21:44.827] [http-nio-8088-exec-1] DEBUG c.game.web.dao.EGameDao.productList - ==> Parameters: 1(Long), 3(Long)
+[2023-04-14 10:21:44.857] [http-nio-8088-exec-1] DEBUG c.game.web.dao.EGameDao.productList - <==      Total: 3
+[2023-04-14 10:21:44.858] [http-nio-8088-exec-1] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+[2023-04-14 10:21:44.858] [http-nio-8088-exec-1] DEBUG c.g.w.d.E.productTagNameSelect - ==>  Preparing: SELECT TAG_NAME FROM TBL_PRODUCT_TAG A, TBL_TAG B WHERE A.TAG_NUM = B.TAG_NUM AND A.PRODUCT_SEQ = ?
+[2023-04-14 10:21:44.858] [http-nio-8088-exec-1] DEBUG c.g.w.d.E.productTagNameSelect - ==> Parameters: 11(Long)
+[2023-04-14 10:21:44.862] [http-nio-8088-exec-1] DEBUG c.g.w.d.E.productTagNameSelect - <==      Total: 5
+[2023-04-14 10:21:44.863] [http-nio-8088-exec-1] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+[2023-04-14 10:21:44.863] [http-nio-8088-exec-1] DEBUG c.g.w.d.E.productTagNameSelect - ==>  Preparing: SELECT TAG_NAME FROM TBL_PRODUCT_TAG A, TBL_TAG B WHERE A.TAG_NUM = B.TAG_NUM AND A.PRODUCT_SEQ = ?
+[2023-04-14 10:21:44.864] [http-nio-8088-exec-1] DEBUG c.g.w.d.E.productTagNameSelect - ==> Parameters: 32(Long)
+[2023-04-14 10:21:44.866] [http-nio-8088-exec-1] DEBUG c.g.w.d.E.productTagNameSelect - <==      Total: 5
+[2023-04-14 10:21:44.866] [http-nio-8088-exec-1] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+[2023-04-14 10:21:44.866] [http-nio-8088-exec-1] DEBUG c.g.w.d.E.productTagNameSelect - ==>  Preparing: SELECT TAG_NAME FROM TBL_PRODUCT_TAG A, TBL_TAG B WHERE A.TAG_NUM = B.TAG_NUM AND A.PRODUCT_SEQ = ?
+[2023-04-14 10:21:44.867] [http-nio-8088-exec-1] DEBUG c.g.w.d.E.productTagNameSelect - ==> Parameters: 54(Long)
+[2023-04-14 10:21:44.871] [http-nio-8088-exec-1] DEBUG c.g.w.d.E.productTagNameSelect - <==      Total: 4
+[2023-04-14 10:21:44.874] [http-nio-8088-exec-1] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+[2023-04-14 10:21:44.875] [http-nio-8088-exec-1] DEBUG c.game.web.dao.EGameDao.productList - ==>  Preparing: SELECT * FROM( SELECT ROWNUM AS RNUM, PRODUCT_SEQ, USER_SELLER_ID, DISCNT_SEQ, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_CONTENT, PRODUCT_BUY_CNT, PAY_PRICE, REVIEW_CNT, PRODUCT_GRADE, PRODUCT_STATUS FROM( SELECT PRODUCT_SEQ, NVL(USER_SELLER_ID,'') AS USER_SELLER_ID, NVL(DISCNT_SEQ,0) AS DISCNT_SEQ, NVL(PRODUCT_NAME,'') AS PRODUCT_NAME, NVL(PRODUCT_PRICE,0) AS PRODUCT_PRICE, NVL(PRODUCT_CONTENT,'') AS PRODUCT_CONTENT, NVL(PRODUCT_BUY_CNT,0) AS PRODUCT_BUY_CNT, NVL(PAY_PRICE,0) AS PAY_PRICE, NVL(REVIEW_CNT,0) AS REVIEW_CNT, NVL(PRODUCT_GRADE,0)AS PRODUCT_GRADE, NVL(PRODUCT_STATUS,'N')AS PRODUCT_STATUS FROM TBL_PRODUCT WHERE PRODUCT_SEQ IN ( SELECT DISTINCT A.PRODUCT_SEQ FROM TBL_PRODUCT A, TBL_PRODUCT_TAG B WHERE A.PRODUCT_SEQ=B.PRODUCT_SEQ AND A.PRODUCT_STATUS = 'Y' ) ORDER BY PRODUCT_GRADE DESC )) WHERE RNUM >= ? AND RNUM <= ?
+[2023-04-14 10:21:44.877] [http-nio-8088-exec-1] DEBUG c.game.web.dao.EGameDao.productList - ==> Parameters: 1(Long), 3(Long)
+[2023-04-14 10:21:44.903] [http-nio-8088-exec-1] DEBUG c.game.web.dao.EGameDao.productList - <==      Total: 3
+[2023-04-14 10:21:44.904] [http-nio-8088-exec-1] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+[2023-04-14 10:21:44.904] [http-nio-8088-exec-1] DEBUG c.g.w.d.E.productTagNameSelect - ==>  Preparing: SELECT TAG_NAME FROM TBL_PRODUCT_TAG A, TBL_TAG B WHERE A.TAG_NUM = B.TAG_NUM AND A.PRODUCT_SEQ = ?
+[2023-04-14 10:21:44.904] [http-nio-8088-exec-1] DEBUG c.g.w.d.E.productTagNameSelect - ==> Parameters: 35(Long)
+[2023-04-14 10:21:44.907] [http-nio-8088-exec-1] DEBUG c.g.w.d.E.productTagNameSelect - <==      Total: 4
+[2023-04-14 10:21:44.907] [http-nio-8088-exec-1] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+[2023-04-14 10:21:44.907] [http-nio-8088-exec-1] DEBUG c.game.web.dao.EGameDao.discntSelect - ==>  Preparing: SELECT DISCNT_SEQ, PRODUCT_SEQ, DISCNT_RATE, DISCNT_START_DATE, DISCNT_END_DATE, DISCNT_STATUS FROM TBL_DISCNT WHERE DISCNT_SEQ = ? AND DISCNT_END_DATE >= TO_CHAR(SYSDATE,'YYYYMMDD') AND DISCNT_STATUS = 'Y'
+[2023-04-14 10:21:44.908] [http-nio-8088-exec-1] DEBUG c.game.web.dao.EGameDao.discntSelect - ==> Parameters: 94(Long)
+[2023-04-14 10:21:44.910] [http-nio-8088-exec-1] DEBUG c.game.web.dao.EGameDao.discntSelect - <==      Total: 1
+[2023-04-14 10:21:44.910] [http-nio-8088-exec-1] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+[2023-04-14 10:21:44.910] [http-nio-8088-exec-1] DEBUG c.g.w.d.E.productTagNameSelect - ==>  Preparing: SELECT TAG_NAME FROM TBL_PRODUCT_TAG A, TBL_TAG B WHERE A.TAG_NUM = B.TAG_NUM AND A.PRODUCT_SEQ = ?
+[2023-04-14 10:21:44.911] [http-nio-8088-exec-1] DEBUG c.g.w.d.E.productTagNameSelect - ==> Parameters: 66(Long)
+[2023-04-14 10:21:44.913] [http-nio-8088-exec-1] DEBUG c.g.w.d.E.productTagNameSelect - <==      Total: 4
+[2023-04-14 10:21:44.914] [http-nio-8088-exec-1] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+[2023-04-14 10:21:44.914] [http-nio-8088-exec-1] DEBUG c.g.w.d.E.productTagNameSelect - ==>  Preparing: SELECT TAG_NAME FROM TBL_PRODUCT_TAG A, TBL_TAG B WHERE A.TAG_NUM = B.TAG_NUM AND A.PRODUCT_SEQ = ?
+[2023-04-14 10:21:44.914] [http-nio-8088-exec-1] DEBUG c.g.w.d.E.productTagNameSelect - ==> Parameters: 63(Long)
+[2023-04-14 10:21:44.916] [http-nio-8088-exec-1] DEBUG c.g.w.d.E.productTagNameSelect - <==      Total: 5
+[2023-04-14 10:21:44.936] [http-nio-8088-exec-1] DEBUG o.s.web.servlet.view.JstlView - View name '/index', model {cookieProductList=null, adminCheck=, recomProductList=[com.game.web.model.Product@a089b8d, com.game.web.model.Product@68672fff, com.game.web.model.Product@1e389e23], discntProductList=[com.game.web.model.Product@7bec5d91, com.game.web.model.Product@35f67592, com.game.web.model.Product@643fac04], buyCntProductList=[com.game.web.model.Product@3e2cef26, com.game.web.model.Product@27352da7, com.game.web.model.Product@21698636], gradeProductList=[com.game.web.model.Product@38af4193, com.game.web.model.Product@6123cc7f, com.game.web.model.Product@6f759de9]}
+[2023-04-14 10:21:44.951] [http-nio-8088-exec-1] DEBUG o.s.web.servlet.view.JstlView - Forwarding to [/WEB-INF/views/index.jsp]
+[2023-04-14 10:21:46.399] [http-nio-8088-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - GET "/resources/css/bootstrap.min.css", parameters={}
+[2023-04-14 10:21:46.407] [http-nio-8088-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - GET "/resources/css/elegant-icons.css", parameters={}
+[2023-04-14 10:21:46.415] [http-nio-8088-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - GET "/resources/css/font-awesome.min.css", parameters={}
+[2023-04-14 10:21:46.419] [http-nio-8088-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - GET "/resources/css/nice-select.css", parameters={}
+[2023-04-14 10:21:46.427] [http-nio-8088-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - GET "/resources/css/plyr.css", parameters={}
+[2023-04-14 10:21:46.453] [http-nio-8088-exec-1] DEBUG c.g.web.interceptor.AuthInterceptor - ############################################################################
+[2023-04-14 10:21:46.455] [http-nio-8088-exec-1] DEBUG c.g.web.interceptor.AuthInterceptor - # Logging end                                                              #
+[2023-04-14 10:21:46.455] [http-nio-8088-exec-1] DEBUG c.g.web.interceptor.AuthInterceptor - ############################################################################
+[2023-04-14 10:21:46.455] [http-nio-8088-exec-1] DEBUG c.g.web.interceptor.AuthInterceptor - # [request url]          : [/index]
+[2023-04-14 10:21:46.461] [http-nio-8088-exec-1] DEBUG c.g.web.interceptor.AuthInterceptor - # [elapse time (second)] : [2.390]
+[2023-04-14 10:21:46.461] [http-nio-8088-exec-1] DEBUG c.g.web.interceptor.AuthInterceptor - ############################################################################
+[2023-04-14 10:21:46.462] [http-nio-8088-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Exiting from "FORWARD" dispatch, status 200
+[2023-04-14 10:21:46.477] [http-nio-8088-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - GET "/resources/css/owl.carousel.min.css", parameters={}
+[2023-04-14 10:21:46.479] [http-nio-8088-exec-6] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler ["/WEB-INF/views/resources/"]
+[2023-04-14 10:21:46.480] [http-nio-8088-exec-3] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler ["/WEB-INF/views/resources/"]
+[2023-04-14 10:21:46.480] [http-nio-8088-exec-4] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler ["/WEB-INF/views/resources/"]
+[2023-04-14 10:21:46.481] [http-nio-8088-exec-1] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler ["/WEB-INF/views/resources/"]
+[2023-04-14 10:21:46.481] [http-nio-8088-exec-5] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler ["/WEB-INF/views/resources/"]
+[2023-04-14 10:21:46.481] [http-nio-8088-exec-2] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler ["/WEB-INF/views/resources/"]
+[2023-04-14 10:21:46.572] [http-nio-8088-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2023-04-14 10:21:46.575] [http-nio-8088-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2023-04-14 10:21:46.582] [http-nio-8088-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2023-04-14 10:21:46.583] [http-nio-8088-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - GET "/resources/css/style.css", parameters={}
+[2023-04-14 10:21:46.583] [http-nio-8088-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - GET "/resources/css/navigation.css", parameters={}
+[2023-04-14 10:21:46.583] [http-nio-8088-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2023-04-14 10:21:46.586] [http-nio-8088-exec-5] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler ["/WEB-INF/views/resources/"]
+[2023-04-14 10:21:46.586] [http-nio-8088-exec-4] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler ["/WEB-INF/views/resources/"]
+[2023-04-14 10:21:46.587] [http-nio-8088-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - GET "/resources/css/slicknav.min.css", parameters={}
+[2023-04-14 10:21:46.589] [http-nio-8088-exec-1] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler ["/WEB-INF/views/resources/"]
+[2023-04-14 10:21:46.593] [http-nio-8088-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2023-04-14 10:21:46.599] [http-nio-8088-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2023-04-14 10:21:46.610] [http-nio-8088-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2023-04-14 10:21:46.612] [http-nio-8088-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2023-04-14 10:21:46.623] [http-nio-8088-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2023-04-14 10:21:46.648] [http-nio-8088-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - GET "/resources/js/jquery-3.3.1.min.js", parameters={}
+[2023-04-14 10:21:46.650] [http-nio-8088-exec-7] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler ["/WEB-INF/views/resources/"]
+[2023-04-14 10:21:46.666] [http-nio-8088-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2023-04-14 10:21:46.679] [http-nio-8088-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - GET "/resources/js/bootstrap.min.js", parameters={}
+[2023-04-14 10:21:46.680] [http-nio-8088-exec-8] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler ["/WEB-INF/views/resources/"]
+[2023-04-14 10:21:46.691] [http-nio-8088-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2023-04-14 10:21:46.699] [http-nio-8088-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - GET "/resources/js/player.js", parameters={}
+[2023-04-14 10:21:46.700] [http-nio-8088-exec-9] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler ["/WEB-INF/views/resources/"]
+[2023-04-14 10:21:46.724] [http-nio-8088-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2023-04-14 10:21:46.741] [http-nio-8088-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - GET "/resources/js/jquery.nice-select.min.js", parameters={}
+[2023-04-14 10:21:46.742] [http-nio-8088-exec-10] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler ["/WEB-INF/views/resources/"]
+[2023-04-14 10:21:46.750] [http-nio-8088-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2023-04-14 10:21:46.755] [http-nio-8088-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - GET "/resources/js/mixitup.min.js", parameters={}
+[2023-04-14 10:21:46.756] [http-nio-8088-exec-3] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler ["/WEB-INF/views/resources/"]
+[2023-04-14 10:21:46.768] [http-nio-8088-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2023-04-14 10:21:46.769] [http-nio-8088-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - GET "/resources/js/jquery.slicknav.js", parameters={}
+[2023-04-14 10:21:46.773] [http-nio-8088-exec-6] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler ["/WEB-INF/views/resources/"]
+[2023-04-14 10:21:46.784] [http-nio-8088-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2023-04-14 10:21:46.820] [http-nio-8088-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - GET "/resources/js/owl.carousel.min.js", parameters={}
+[2023-04-14 10:21:46.822] [http-nio-8088-exec-2] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler ["/WEB-INF/views/resources/"]
+[2023-04-14 10:21:46.827] [http-nio-8088-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - GET "/resources/js/main.js", parameters={}
+[2023-04-14 10:21:46.828] [http-nio-8088-exec-1] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler ["/WEB-INF/views/resources/"]
+[2023-04-14 10:21:46.840] [http-nio-8088-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2023-04-14 10:21:46.842] [http-nio-8088-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2023-04-14 10:21:46.845] [http-nio-8088-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - GET "/resources/js/report-form.js", parameters={}
+[2023-04-14 10:21:46.847] [http-nio-8088-exec-1] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler ["/WEB-INF/views/resources/"]
+[2023-04-14 10:21:46.849] [http-nio-8088-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - GET "/resources/js/icia.common.js", parameters={}
+[2023-04-14 10:21:46.855] [http-nio-8088-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2023-04-14 10:21:46.856] [http-nio-8088-exec-5] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler ["/WEB-INF/views/resources/"]
+[2023-04-14 10:21:46.863] [http-nio-8088-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - GET "/resources/js/icia.ajax.js", parameters={}
+[2023-04-14 10:21:46.864] [http-nio-8088-exec-7] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler ["/WEB-INF/views/resources/"]
+[2023-04-14 10:21:46.866] [http-nio-8088-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2023-04-14 10:21:46.870] [http-nio-8088-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - GET "/resources/icon/logo.png", parameters={}
+[2023-04-14 10:21:46.872] [http-nio-8088-exec-8] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler ["/WEB-INF/views/resources/"]
+[2023-04-14 10:21:46.874] [http-nio-8088-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2023-04-14 10:21:46.893] [http-nio-8088-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2023-04-14 10:21:46.934] [http-nio-8088-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - GET "/resources/icon/logo.png", parameters={}
+[2023-04-14 10:21:46.935] [http-nio-8088-exec-9] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler ["/WEB-INF/views/resources/"]
+[2023-04-14 10:21:46.941] [http-nio-8088-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2023-04-14 10:21:47.127] [http-nio-8088-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - GET "/resources/fonts/ElegantIcons.woff", parameters={}
+[2023-04-14 10:21:47.128] [http-nio-8088-exec-10] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler ["/WEB-INF/views/resources/"]
+[2023-04-14 10:21:47.130] [http-nio-8088-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - GET "/resources/fonts/fontawesome-webfont.woff2?v=4.7.0", parameters={masked}
+[2023-04-14 10:21:47.136] [http-nio-8088-exec-3] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler ["/WEB-INF/views/resources/"]
+[2023-04-14 10:21:47.196] [http-nio-8088-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2023-04-14 10:21:47.257] [http-nio-8088-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - GET "/resources/img_main/HogwartsLegacy.jpg", parameters={}
+[2023-04-14 10:21:47.260] [http-nio-8088-exec-6] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler ["/WEB-INF/views/resources/"]
+[2023-04-14 10:21:47.262] [http-nio-8088-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - GET "/resources/img_main/DeadSpace.jpg", parameters={}
+[2023-04-14 10:21:47.264] [http-nio-8088-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - GET "/resources/img_main/RedDeadRedemption2.jpg", parameters={}
+[2023-04-14 10:21:47.266] [http-nio-8088-exec-4] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler ["/WEB-INF/views/resources/"]
+[2023-04-14 10:21:47.269] [http-nio-8088-exec-2] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler ["/WEB-INF/views/resources/"]
+[2023-04-14 10:21:47.304] [http-nio-8088-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2023-04-14 10:21:47.337] [http-nio-8088-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - GET "/resources/img_gamemain/RF.jpg", parameters={}
+[2023-04-14 10:21:47.339] [http-nio-8088-exec-1] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler ["/WEB-INF/views/resources/"]
+[2023-04-14 10:21:47.352] [http-nio-8088-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - GET "/resources/img_gamemain/LobotomyCorporation.jpg", parameters={}
+[2023-04-14 10:21:47.353] [http-nio-8088-exec-5] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler ["/WEB-INF/views/resources/"]
+[2023-04-14 10:21:47.360] [http-nio-8088-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2023-04-14 10:21:47.373] [http-nio-8088-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2023-04-14 10:21:47.385] [http-nio-8088-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2023-04-14 10:21:47.402] [http-nio-8088-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - GET "/resources/img_gamemain/Legends.jpg", parameters={}
+[2023-04-14 10:21:47.403] [http-nio-8088-exec-7] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler ["/WEB-INF/views/resources/"]
+[2023-04-14 10:21:47.410] [http-nio-8088-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - GET "/resources/img_gamemain/RedDeadRedemption2.jpg", parameters={}
+[2023-04-14 10:21:47.412] [http-nio-8088-exec-8] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler ["/WEB-INF/views/resources/"]
+[2023-04-14 10:21:47.413] [http-nio-8088-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - GET "/resources/img_gamemain/ThePaleBeyond.jpg", parameters={}
+[2023-04-14 10:21:47.415] [http-nio-8088-exec-9] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler ["/WEB-INF/views/resources/"]
+[2023-04-14 10:21:47.423] [http-nio-8088-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - GET "/resources/img_gamemain/MarvelsSpiderManMilesMorales.jpg", parameters={}
+[2023-04-14 10:21:47.424] [http-nio-8088-exec-3] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler ["/WEB-INF/views/resources/"]
+[2023-04-14 10:21:47.435] [http-nio-8088-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2023-04-14 10:21:47.437] [http-nio-8088-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - GET "/resources/img_gamemain/KerbalSpaceProgram2.jpg", parameters={}
+[2023-04-14 10:21:47.438] [http-nio-8088-exec-2] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler ["/WEB-INF/views/resources/"]
+[2023-04-14 10:21:47.459] [http-nio-8088-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2023-04-14 10:21:47.462] [http-nio-8088-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2023-04-14 10:21:47.477] [http-nio-8088-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2023-04-14 10:21:47.515] [http-nio-8088-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - GET "/resources/img_gamemain/Frostpunk.jpg", parameters={}
+[2023-04-14 10:21:47.516] [http-nio-8088-exec-1] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler ["/WEB-INF/views/resources/"]
+[2023-04-14 10:21:47.532] [http-nio-8088-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2023-04-14 10:21:47.539] [http-nio-8088-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2023-04-14 10:21:47.549] [http-nio-8088-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - GET "/resources/img_gamemain/TheLongDark.jpg", parameters={}
+[2023-04-14 10:21:47.551] [http-nio-8088-exec-5] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler ["/WEB-INF/views/resources/"]
+[2023-04-14 10:21:47.565] [http-nio-8088-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2023-04-14 10:21:47.577] [http-nio-8088-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - GET "/resources/img_gamemain/%EB%8D%B0%EC%9D%B4%EB%B8%8C%EB%8D%94%EB%8B%A4%EC%9D%B4%EB%B2%84.jpg", parameters={}
+[2023-04-14 10:21:47.578] [http-nio-8088-exec-10] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler ["/WEB-INF/views/resources/"]
+[2023-04-14 10:21:47.601] [http-nio-8088-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - GET "/resources/img_gamemain/HorizonChaseTurbo.jpg", parameters={}
+[2023-04-14 10:21:47.602] [http-nio-8088-exec-9] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler ["/WEB-INF/views/resources/"]
+[2023-04-14 10:21:47.621] [http-nio-8088-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2023-04-14 10:21:47.622] [http-nio-8088-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2023-04-14 10:21:47.624] [http-nio-8088-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2023-04-14 10:21:47.627] [http-nio-8088-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2023-04-14 10:21:47.892] [http-nio-8088-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - GET "/resources/icon/favicon.png", parameters={}
+[2023-04-14 10:21:47.893] [http-nio-8088-exec-2] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler ["/WEB-INF/views/resources/"]
+[2023-04-14 10:21:47.901] [http-nio-8088-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2023-04-14 10:22:09.102] [main] DEBUG o.s.w.c.s.XmlWebApplicationContext - Closing WebApplicationContext for namespace 'dispatcherServlet-servlet', started on Fri Apr 14 10:21:27 KST 2023, parent: Root WebApplicationContext

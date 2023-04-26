@@ -1,0 +1,154 @@
+.pointLoadModal {
+  position: absolute;
+  z-index: 200;
+  top: 15%;
+  left: 35%;
+  width: 600px;
+  background: #0b0c2a;
+  padding: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.pointLoadModal h3 {
+	color: #fff;
+	text-align: center;
+}
+
+.pointLoadModal_inputDiv {
+	width: 560px;
+	display: flex;
+}
+
+.pointLoadModal_inputDiv span {
+	position: absolute;
+	height: 60px;
+	font-size: larger;
+	padding: 16px;
+	user-select: none;
+}
+
+.pointLoadModal_inputDiv input {
+	background-color: #091a40;
+    border: 0;
+    resize: none;
+    color: #fff;
+    width: 100%;
+    height: 60px;
+    padding: 20px 20px;
+    font-size: larger;
+    text-align: right;
+    border-bottom: 1px solid #adadad7d;
+}
+
+.pointLoadBefore input, .pointLoadAfter input {
+	background-color: #091a40;
+    border: 0;
+    resize: none;
+    color: #fff;
+    width: 100%;
+    height: 60px;
+    padding: 20px 20px;
+    font-size: larger;
+    text-align: right;
+}
+
+.space-adpative {
+	width: 600px;
+	height: 20px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.amountOption_div {
+	width: 560px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.amountOption1, .amountOption2, .amountOption3, .amountOption4 {
+	background-color: #091a40;
+	text-align: center;
+	width: 100%;
+	height: 40px;
+	padding: 7px;
+	font-size: 18px;
+	cursor: pointer;
+}
+
+.amountOption_div div:hover {
+	background-color: #e53637;
+}
+
+.pointLoadBefore, .pointLoadAfter {
+	width: 560px;
+    display: flex;
+}
+
+.pointLoadBefore span, .pointLoadAfter span {
+	background-color: #091a40;
+    border: 0;
+    resize: none;
+    color: #fff;
+    width: 100%;
+    height: 60px;
+    padding: 20px 20px;
+    font-size: larger;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.pointLoadBtn {
+	float: left;
+	width: 100%;
+}
+
+.btnKaKaoPay {
+	width: 180px;
+    height: 50px;
+    padding: 0;
+    border: 0;
+    background-color: #091a40;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #fff;
+    float: right;
+}
+
+.btnCancel {
+	width: 120px;
+    height: 50px;
+    padding: 0;
+    border: 0;
+    background-color: #091a40;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #fff;
+}
+
+.pointLoadBtn button:hover {
+	background-color: #e53637;
+}
+
+.modal-container {
+  background: rgba(0,0,0,.5);
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 200;
+  backdrop-filter: blur(3px);
+}
+
+.modal-container.show-modal {
+  display: block;
+}
+

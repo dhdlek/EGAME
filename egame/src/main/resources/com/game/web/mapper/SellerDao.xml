@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.game.web.dao.SellerDao">
+	<!-- 유저 resultMap -->
+	<resultMap type="com.game.web.model.User" id="userResultMap">
+		<id column="USER_ID" property="userId" />
+		<result column="USER_PWD" property="userPwd" />
+		<result column="USER_NAME" property="userName" />
+		<result column="USER_NICKNAME" property="userNickname" />
+		<result column="USER_EMAIL" property="userEmail" />
+		<result column="USER_BIRTH" property="userBirth" />
+		<result column="BUSINESS_NUM" property="businessNum" />
+		<result column="USER_REG_DATE" property="userRegDate" />
+		<result column="USER_IMG" property="userImg" />
+		<result column="POINT_POS" property="pointPos" />
+		<result column="USER_STATUS" property="userStatus" />
+		<result column="USER_CLASS" property="userClass" />
+	</resultMap>
+	
+	<!-- 상품 resultMap -->
+	<resultMap type="com.game.web.model.Product" id="productResultMap">
+		<id column="PRODUCT_SEQ" property="productSeq" />
+		<result column="USER_SELLER_ID" property="userSellerId" />
+		<result column="DISCNT_SEQ" property="discntSeq" />
+		<result column="PRODUCT_NAME" property="productName" />
+		<result column="PRODUCT_PRICE" property="productPrice" />
+		<result column="PRODUCT_CONTENT" property="productContent" />
+		<result column="PRODUCT_BUY_CNT" property="productBuyCnt" />
+		<result column="PAY_PRICE" property="payPrice" />
+		<result column="REVIEW_CNT" property="reviewCnt" />
+		<result column="PRODUCT_GRADE" property="productGrade" />
+		<result column="PRODUCT_STATUS" property="productStatus" />
+	</resultMap>
+	
+	<!-- 결제 resultMap -->
+	<resultMap type="com.game.web.model.Pay" id="payResultMap">
+	<id column="PAY_SEQ" property="paySeq"/>
+	<result column="PRODUCT_SEQ" property="productSeq"/>
+	<result column="PRODUCT_NAME" property="productName"/>
+	<result column="USER_ID" property="userId"/>
+	<result column="PAY_PRICE" property="payPrice"/>
+	<result column="PAY_DATE" property="payDate"/>
+	<result column="PAY_STATUS" property="payStatus"/>
+	<result column="PAY_METHOD" property="payMethod"/>
+	
+	<result column="USER_SELLER_ID" property="userSellerId" />
+	<result column="POINT_STATUS" property="pointStatus"/>
+	<result column="POINT_DATE" property="pointDate"/>
+	</resultMap>
+
+	<!-- 판매자 판매게임 리스트 (페이징 O) -->
+	<select id="sellGameList" parameterType="com.game.web.model.Product" resultMap="productResultMap">
+		SELECT PRODUCT_SEQ,
+			   USER_SELLER_ID,
+		       PRODUCT_NAME,
+		       PRODUCT_BUY_CNT,
+		       PRODUCT_GRADE,
+		       PRODUCT_STATUS
+		  FROM (SELECT ROWNUM AS RNUM,
+		               PRODUCT_SEQ,
+		               USER_SELLER_ID,
+		               PRODUCT_NAME,
+		               PRODUCT_BUY_CNT,
+		               PRODUCT_GRADE,
+		               PRODUCT_STATUS
+		          FROM (SELECT PRODUCT_SEQ,
+		          			   USER_SELLER_ID,
+		                       PRODUCT_NAME,
+		                       NVL(PRODUCT_BUY_CNT, 0) AS PRODUCT_BUY_CNT,
+		                       NVL(PRODUCT_GRADE, 0) AS PRODUCT_GRADE,
+		                       PRODUCT_STATUS
+		                  FROM TBL_PRODUCT
+		                 WHERE USER_SELLER_ID = #{userSellerId}
+		                 ORDER BY PRODUCT_SEQ DESC))
+		 WHERE RNUM <![CDATA[>=]]> #{startRow}
+		   AND RNUM <![CDATA[<=]]> #{endRow}
+	</select>
+	
+	<!-- 판매자 판매게임 조회 -->
+	<select id="countSaleGame" parameterType="String" resultType="int">
+		SELECT COUNT(PRODUCT_SEQ)
+		  FROM TBL_PRODUCT
+		 WHERE USER_SELLER_ID = #{value}
+	</select>
+	
+	<!-- 게임 판매정지 -->
+	<update id="waitStatusPrd" parameterType="com.game.web.model.Product">
+		UPDATE TBL_PRODUCT
+		   SET PRODUCT_STATUS = 'N'
+		 WHERE PRODUCT_SEQ = #{productSeq}
+		   AND USER_SELLER_ID = #{userSellerId}
+		   AND PRODUCT_STATUS = 'Y'
+	</update>
+	
+	<!-- 판매내역 게임수 -->
+	<select id="sellDetailCount" parameterType="String" resultType="long">
+		SELECT COUNT(A.PRODUCT_SEQ)
+		  FROM TBL_PAY A, TBL_PRODUCT B
+		 WHERE A.PRODUCT_SEQ = B.PRODUCT_SEQ
+		   AND B.USER_SELLER_ID = #{value}
+	</select>
+	
+	<!-- 판매내역 리스트 (페이징)-->
+	<select id="sellDetailList" parameterType="com.game.web.model.Pay" resultMap="payResultMap">
+		SELECT PAY_SEQ,
+		       PRODUCT_SEQ,
+		       USER_ID,
+		       PAY_PRICE,              
+		       PAY_METHOD,
+		       USER_SELLER_ID,
+		       PRODUCT_NAME,
+		       POINT_STATUS,
+		       POINT_DATE
+		  FROM (SELECT ROWNUM AS RNUM,
+		               PAY_SEQ,
+		               PRODUCT_SEQ,
+		               USER_ID,
+		               PAY_PRICE,             
+		               PAY_METHOD,
+		               USER_SELLER_ID,
+		               PRODUCT_NAME,
+		               POINT_STATUS,
+		               POINT_DATE
+		          FROM (SELECT A.PAY_SEQ AS PAY_SEQ,
+		                       NVL(A.PRODUCT_SEQ, 0) AS PRODUCT_SEQ,
+		                       A.USER_ID AS USER_ID,
+		                       A.PAY_PRICE AS PAY_PRICE,                             
+		                       A.PAY_METHOD AS PAY_METHOD,
+		                       B.USER_SELLER_ID AS USER_SELLER_ID,
+		                       B.PRODUCT_NAME AS PRODUCT_NAME,
+		                       C.POINT_STATUS AS POINT_STATUS,
+		                       NVL(TO_CHAR(C.POINT_DATE, 'YYYY.MM.DD HH24:MI:SS'), '') AS POINT_DATE
+		                  FROM TBL_PAY A, TBL_PRODUCT B, TBL_POINT C
+		                 WHERE A.PRODUCT_SEQ = B.PRODUCT_SEQ
+		                   AND A.PAY_SEQ = C.PAY_SEQ
+		                   AND B.USER_SELLER_ID = #{userSellerId}
+		                 ORDER BY C.POINT_SEQ DESC))
+		 WHERE RNUM <![CDATA[>=]]> #{startRow}
+		   AND RNUM <![CDATA[<=]]> #{endRow}
+	</select>
+	
+	<!-- 상품 별 매출액 -->
+	<select id="amount" parameterType="com.game.web.model.Pay" resultType="long">
+		SELECT NVL(SUM(A.PAY_PRICE), 0) AS PAY_PRICE
+		  FROM TBL_PAY A, TBL_PRODUCT B
+		 WHERE A.PRODUCT_SEQ = B.PRODUCT_SEQ
+		   AND B.USER_SELLER_ID = #{userSellerId}
+		   AND A.PAY_STATUS = 1
+		   AND A.PRODUCT_SEQ = #{productSeq}
+	</select>
+	
+	<!-- 상품 총 매출액 -->
+	<select id="totalAmount" parameterType="String" resultType="long">
+		SELECT NVL(SUM(A.PAY_PRICE), 0) AS PAY_PRICE
+		  FROM TBL_PAY A, TBL_PRODUCT B
+		 WHERE A.PRODUCT_SEQ = B.PRODUCT_SEQ
+		   AND B.USER_SELLER_ID = #{userSellerId}
+		   AND A.PAY_STATUS = 1
+	</select>
+	
+</mapper>

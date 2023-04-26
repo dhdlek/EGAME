@@ -1,0 +1,145 @@
+* { user-select: none; }
+
+body {
+    background-color: #0b0c2a;
+    color: #fff;
+}
+
+.report_list_section {
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.space-adpative {
+    height: 30px;
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+}
+
+.report_list_section h2 {
+    color: #fff;
+}
+
+.report_search {
+    float: right;
+}
+
+.report_search_textbox {
+    height: 40px;
+    width: 200px;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    text-align: center;
+    margin-right: -6px;
+}
+
+.report_search_textbox:focus {
+    outline: none;
+}
+
+.report_search_btn {
+    height: 40px;
+    width: 80px;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    background-color: #091a40;
+    color: #fff;
+    position: relative;
+}
+
+.report_search_btn:hover {
+    background-color: #e53637;
+    cursor: pointer;
+}
+
+.report_pr, .report_tag, .report_searchvalue_option {
+    width: 150px;
+    height: 40px;
+    background-color: initial;
+    border: none;
+    color: #fff;
+    border:#8b8b8ba2;
+    border-style: solid;
+    border-width: thin;
+    text-align: center;
+}
+
+.report_pr option, .report_tag option, .report_searchvalue_option {
+    background-color: #0b0c2a;
+  }
+
+table {
+    border-collapse: collapse;
+}
+
+tbody tr:hover {
+	background-color: #e53637;
+	cursor: pointer;
+}
+
+.report_list_table {
+    width: 100%;
+    border-bottom: 1px solid #e7e7e7;
+    table-layout:fixed;
+}
+
+.report_list_table td {
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.report_list_table th{
+    padding: 10px;
+    border-top: 1px solid #e7e7e7;
+    height: 45px;
+}
+
+.report_list_table td{
+    padding: 10px;
+    border-top: 1px solid #e7e7e7;
+    height: 60px;
+}
+
+.reportList_bottom {
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    display: flex;
+}
+
+.reportList_page {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.page_link {
+    width: 42px;
+    height: 37px;
+    padding: 5px;
+    color: #fff;
+}
+
+.page_link:hover {
+    background-color: #e53637;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.page_link_cur {
+    width: 42px;
+    height: 37px;
+    padding: 5px;
+    color: #fff;
+    background-color: #e53637;
+    cursor: default;
+    margin-left: 2px;
+    margin-right: 2px;
+}
